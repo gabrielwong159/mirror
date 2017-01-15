@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 var busPage = new Page("bus", busInit, busStop, busDirectory = defaultDirectory);
-=======
+
 var busPage = new Page("bus", busInit, busStop);
->>>>>>> origin/master
+
 var id;
 
 function busInit() {

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //this hides everything in the html so we can have bus overlay
 function hideBox(elementID)
 {
@@ -16,11 +16,6 @@ const mainDirectory = {
 	[KEY_2]: busPage.init.bind(busPage),
 	[KEY_3]: newsPage.init.bind(newsPage),
 	[KEY_4]: dirPage.init.bind(dirPage),
-=======
-const mainDirectory = {
-	[KEY_2]: busPage.init.bind(busPage),
-	[KEY_3]: newsPage.init.bind(newsPage),
->>>>>>> origin/master
 };
 
 var mainPage = new Page("main", mainInit, null, mainDirectory);
@@ -30,7 +25,7 @@ function mainInit() {
 }
 
 function loadMain() {
-<<<<<<< HEAD
+
 	$display.innerHTML = "<img src='/img/idcwelcome.png'>";
 	showBox("info");
 	showBox("main");
@@ -40,9 +35,4 @@ function loadMain() {
 
 mainPage.init();
 
-=======
-	$display.innerHTML = "<div id=\"main\"><p>" + "MAIN MENU" + "</p></div>";
-}
-
->>>>>>> origin/master
 defaultDirectory[KEY_1] = mainPage.init.bind(mainPage);

@@ -166,10 +166,18 @@ canvas {
     margin-top: 8px;
 }
 
-p.header {
-  font-size: 40px;
+p.mapsheader {
+  font-size: 50px;
   text-align: center;
+  margin-top: 20%;
 }
+
+img.maps {
+  max-width: 1240px;
+  position: absolute;
+  margin-top: 3%;
+}
+
 
 #busdiv {
   display: block;
