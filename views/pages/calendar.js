@@ -60,27 +60,8 @@ function loadCalendar() {
   hideBox("main");
   hideBox("motd");
   showBox("caldiv");
-  //THIS STUFF PROCESSES MY EVENTS FROM MY GOOGLE CALENDAR, RETURNS IN JSON
-  /*var scriptString = new XMLHttpRequest();
-     scriptString.open('GET', 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI');
-     scriptString.onload = function() {
-       console.log(scriptString.responseText);
-       var calData = jQuery.parseJSON(scriptString.responseText);
-       var calHtml=''
 
-       for (var obj in calData.items) {
-         caldiv.innerHTML = calData.items[obj].description;
-         caldiv[INTEGERPARSEDATE(calData.items.[obj].DATE)].innerHTML;
-       }
-     };
-   scriptString.send();
-   */
-   //END OF JSON FEED
-
-
-   //var dateJS = Date.parse('MONTH/DAY/YEAR');
-   //caldiv.innerHTML = ''
-
+//THIS DEFINES OUR CALENDAR
   var dateJS = Date.parse('1/1/2017');
   console.log("getDay returns:" + dateJS.getDay());
   console.log("Today is " + Date() + " and it is a " + Date.today().getDayName() + ".");
@@ -101,6 +82,7 @@ function loadCalendar() {
   console.log(monthsFirstDate);
   document.getElementById('calendar1').contentWindow.document.getElementById("monthAndYear").innerHTML = months[mm] + " " + yyyy;
   console.log(mm);
+  //this defines my calendar date system
   if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12)
   {
     var i = 0;
@@ -129,7 +111,28 @@ function loadCalendar() {
     }
   }
   //1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
+  var dayBox = "day"+dd;
+  document.getElementById('calendar1').contentWindow.document.getElementById(dayBox).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
+  //THIS STUFF PROCESSES MY EVENTS FROM MY GOOGLE CALENDAR, RETURNS IN JSON
+  /*var scriptString = new XMLHttpRequest();
+     scriptString.open('GET', 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI');
+     scriptString.onload = function() {
+       console.log(scriptString.responseText);
+       var calData = jQuery.parseJSON(scriptString.responseText);
+       var calHtml=''
 
+       for (var obj in calData.items) {
+         caldiv.innerHTML = calData.items[obj].description;
+         caldiv[INTEGERPARSEDATE(calData.items.[obj].DATE)].innerHTML;
+       }
+     };
+   scriptString.send();
+   */
+   //END OF JSON FEED
+
+
+   //var dateJS = Date.parse('MONTH/DAY/YEAR');
+   //caldiv.innerHTML = ''
 
   //caldiv.innerHTML = htmlString;
   //display.innerHTML += img;
