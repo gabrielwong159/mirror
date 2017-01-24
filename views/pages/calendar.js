@@ -31,7 +31,6 @@ function calInit() {
 	loadCalendar();
 }
 
-
 var months = {
   '1' : 'January',
   '2' : 'February',
@@ -46,7 +45,15 @@ var months = {
   '11': 'November',
   '12': 'December',
 }
-
+var days = {
+  '1' : 'Monday',
+  '2' : 'Tuesday',
+  '3' : 'Wednesday',
+  '4' : 'Thursday',
+  '5' : 'Friday',
+  '6' : 'Saturday',
+  '0' : 'Sunday',
+}
 
 function loadCalendar() {
   hideBox("info");
@@ -74,26 +81,39 @@ function loadCalendar() {
    //var dateJS = Date.parse('MONTH/DAY/YEAR');
    //caldiv.innerHTML = ''
 
-   var dateJS = Date.parse('1/1/2017');
-   console.log("getDay returns:" + dateJS.getDay());
-   console.log("Today is " + Date() + " and it is a " + Date.today().getDayName() + ".");
-
-   // Finding where to highlight by default, ie. today's date. Also stores today's dd, mm, yyyy.
-   var today = new Date();
-   var dd = today.getDate();
-   var mm = today.getMonth()+1; //January is 0!
-   var yyyy = today.getFullYear();
-   console.log(dd + " " + mm + " " + yyyy);
-   //document.getElementById(dd).style.color = "blue";
-   document.getElementById('calendar1').contentWindow.document.getElementById("monthAndYear").innerHTML = months[mm] + " " + yyyy;
+  var dateJS = Date.parse('1/1/2017');
+  console.log("getDay returns:" + dateJS.getDay());
+  console.log("Today is " + Date() + " and it is a " + Date.today().getDayName() + ".");
+  // Finding where to highlight by default, ie. today's date. Also stores today's dd, mm, yyyy.
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+    //document.getElementById(dd).style.color = "blue";
+  console.log(Date.parse("1.20.2017").toString("dddd"));
+  console.log(Date.parse("1.22.2017").getDay("d"));
+  //REMEMBER THE FORMAT IS MM/DD/YYYY. DARN AMERICANS.
+  var todaysDateString = mm+"."+dd+"."+yyyy;
+  console.log(todaysDateString);
+  var monthsFirstDay = mm+"."+1+"."+yyyy;
+  console.log("This month's first day lands on a " + Date.parse(monthsFirstDay).toString("dddd"));
+  var monthsFirstDate = parseInt(Date.parse(monthsFirstDay).toString("d"));
+  console.log(monthsFirstDate);
+  document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate).innerHTML = "1";
+  document.getElementById('calendar1').contentWindow.document.getElementById("monthAndYear").innerHTML = months[mm] + " " + yyyy;
+  var i = monthsFirstDate;
+  for (i = 1; i < 31; i++) {
+      var prevBoxDay = document.getElementById('calendar1').contentWindow.document.getElementById(i).innerHTML;
+      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = parseInt(prevBoxDay)+1;
+  }
 
   //var htmlString = '<iframe src="https://calendar.google.com/calendar/embed?src=uniquosity%40gmail.com&ctz=Asia/Singapore" class = "calendar"></iframe> <link rel="stylesheet" href="/css/custom_calendar.css">';
   //var img = "<img src = '/img/school.png'>";
   //caldiv.innerHTML = htmlString;
   //display.innerHTML += img;
-	calDirectory[KEY_1] = mainPage.init.bind(mainPage);
-	calDirectory[KEY_2] = leftMonth;
-	calDirectory[KEY_3] = rightMonth;
+  calDirectory[KEY_1] = mainPage.init.bind(mainPage);
+  calDirectory[KEY_2] = leftMonth;
+  calDirectory[KEY_3] = rightMonth;
   //calDirectory[KEY_4] = leftDay;
   //calDirectory[KEY_5] = rightDay;
   //calDirectory[KEY_6] = upDay;
