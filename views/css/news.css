@@ -1,0 +1,14 @@
+div#newsDisplay {
+	margin-top: 200px;
+}
+
+p#newsTitle {
+	font-size: 16px;
+	text-decoration: underline;
+
+	margin-bottom: 0;
+}
+
+p#newsDescription {
+	margin-top: 0;
+}

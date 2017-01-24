@@ -1,33 +1,52 @@
-
 var newsPage = new Page("news", newsInit, null);
-//const URL = 'http://www.channelnewsasia.com/starterkit/servlet/cna/rss/home.xml';
-const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
+const URL = 'http://www.channelnewsasia.com/starterkit/servlet/cna/rss/home.xml';
+//const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
 
 function newsInit() {
 	loadNews();
 }
 
-//newsPage.init() [I BLACKED THIS OUT]
-
-
 function loadNews() {
 	fetch(URL)
 	.then(res => res.text())
-	.then(function(text) {
-		console.log('yes');
+	.then(xmlText => xml2json(parseXml(xmlText), "  "))
+	.then(jsonString => JSON.parse(jsonString))
+	.then(function(jsonObj) {
+		var htmlString = "<div id='newsDisplay'>";
 
-		var xmlString = $.parseXML(text);
-		var xml = $(xmlString);
+		for (var i=8; i<18; i++) {
+			var title = jsonObj.rss.channel[i].item.title;
+			var description = jsonObj.rss.channel[i].item.description;
 
-		//TODO: parse the xml here
+			htmlString+= "<p id='newsTitle'>" + title + "</p><p id='newsDescription'>" + description + "</p><br>";
+		}
+		htmlString+= "</div>";
 
-		var xmlText = xml.find('title').text();
-
-		$display.innerHTML = "<div id=\"news\"><p>" + xmlText + "hi </p></div>";
+		$display.innerHTML = htmlString;
 	})
 	.catch((err) => {
-
 		$display.innerHTML = `<div id='error'>Yesss: ${err}</div>`;
-
 	});
+}
+
+function parseXml(xml) {
+   var dom = null;
+   if (window.DOMParser) {
+      try { 
+         dom = (new DOMParser()).parseFromString(xml, "text/xml"); 
+      } 
+      catch (e) { dom = null; }
+   }
+   else if (window.ActiveXObject) {
+      try {
+         dom = new ActiveXObject('Microsoft.XMLDOM');
+         dom.async = false;
+         if (!dom.loadXML(xml)) // parse error ..
+            window.alert(dom.parseError.reason + dom.parseError.srcText);
+      } 
+      catch (e) { dom = null; }
+   }
+   else
+      alert("oops");
+   return dom;
 }
