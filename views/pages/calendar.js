@@ -99,16 +99,35 @@ function loadCalendar() {
   console.log("This month's first day lands on a " + Date.parse(monthsFirstDay).toString("dddd"));
   var monthsFirstDate = parseInt(Date.parse(monthsFirstDay).toString("d"));
   console.log(monthsFirstDate);
-  document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate).innerHTML = "1";
   document.getElementById('calendar1').contentWindow.document.getElementById("monthAndYear").innerHTML = months[mm] + " " + yyyy;
-  var i = monthsFirstDate;
-  for (i = 1; i < 31; i++) {
-      var prevBoxDay = document.getElementById('calendar1').contentWindow.document.getElementById(i).innerHTML;
-      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = parseInt(prevBoxDay)+1;
+  console.log(mm);
+  if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12)
+  {
+    var i = 0;
+    for (i = 0; i < 31; i++) {
+      var dateNo = 1+i;
+      var dateContainer = "<div class=dateNumber>"+dateNo+"<div id=day"+dateNo+"></div></div>";
+      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
+    }
   }
-
-  //var htmlString = '<iframe src="https://calendar.google.com/calendar/embed?src=uniquosity%40gmail.com&ctz=Asia/Singapore" class = "calendar"></iframe> <link rel="stylesheet" href="/css/custom_calendar.css">';
-  //var img = "<img src = '/img/school.png'>";
+  else if (mm == 4 || mm == 6 || mm == 9 || mm == 11)
+  {
+    var i = 0;
+    for (i = 0; i < 30; i++) {
+      var dateNo = 1+i;
+      var dateContainer = "<div class=dateNumber>"+dateNo+"<div id=day"+dateNo+"></div></div>";
+      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
+    }
+  }
+  else (mm == 4 || mm == 6 || mm == 9 || mm == 11)
+  {
+    var i = 0;
+    for (i = 0; i < 28; i++) {
+      var dateNo = 1+i;
+      var dateContainer = "<div class=dateNumber>"+dateNo+"<div id=day"+dateNo+"></div></div>";
+      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
+    }
+  }
   //caldiv.innerHTML = htmlString;
   //display.innerHTML += img;
   calDirectory[KEY_1] = mainPage.init.bind(mainPage);
