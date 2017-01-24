@@ -6,27 +6,56 @@ function newsInit() {
 	loadNews();
 }
 
+var json;
+
 function loadNews() {
 	fetch(URL)
 	.then(res => res.text())
 	.then(xmlText => xml2json(parseXml(xmlText), "  "))
 	.then(jsonString => JSON.parse(jsonString))
-	.then(function(jsonObj) {
-		var htmlString = "<div id='newsDisplay'>";
-
-		for (var i=8; i<18; i++) {
-			var title = jsonObj.rss.channel[i].item.title;
-			var description = jsonObj.rss.channel[i].item.description;
-
-			htmlString+= "<p id='newsTitle'>" + title + "</p><p id='newsDescription'>" + description + "</p><br>";
-		}
-		htmlString+= "</div>";
-
-		$display.innerHTML = htmlString;
+	.then(function(jsonObj) {	
+		json = jsonObj;	
+		fetchNews(jsonObj, "<div id='newsDisplay'>", 8);
 	})
 	.catch((err) => {
 		$display.innerHTML = `<div id='error'>Yesss: ${err}</div>`;
 	});
+}
+
+function fetchNews(jsonObj, htmlString, counter) {
+	if (counter == 18) {
+		htmlString+= "</div>";
+		$display.innerHTML = htmlString;
+	}
+
+	var item = jsonObj.rss.channel[counter].item;
+	var title = item.title;
+	var description = item.description;
+	var url = item.link;
+
+	fetch(item.link)
+	.then(res => res.text())
+	.then(function (htmlText) {
+		imageUrl = '';
+
+		var index = htmlText.search('.jpg');
+		if (index>=0) {
+			var htmlSubstring = htmlText.substring(index+4);
+			var frontIndex = htmlText.search('<meta property="og:image" content="');
+
+			if (frontIndex>=0) {
+				var endIndex = htmlText.search('.jpg');		
+				imageUrl = htmlText.substring(frontIndex+35, endIndex+4);
+			}
+		}
+
+		htmlString+= "<a href='" + url + "'><p id='newsTitle'>" + title + "</p></a><p id='newsDescription'>" + description + "</p><br>";
+		htmlString+= '<img class="newsPic" src="' + imageUrl + '">';
+	})
+	.then(function() {
+		return htmlString+= fetchNews(jsonObj, htmlString, counter+1);
+	});
+
 }
 
 function parseXml(xml) {
