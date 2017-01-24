@@ -106,7 +106,7 @@ function loadCalendar() {
     var i = 0;
     for (i = 0; i < 31; i++) {
       var dateNo = 1+i;
-      var dateContainer = "<div class=dateNumber>"+dateNo+"<div id=day"+dateNo+"></div></div>";
+      var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id=day"+dateNo+">1WHY HELLO THERE DEBUGGING TEST LOTS OF CONTENT</div>";
       document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
     }
   }
@@ -115,19 +115,22 @@ function loadCalendar() {
     var i = 0;
     for (i = 0; i < 30; i++) {
       var dateNo = 1+i;
-      var dateContainer = "<div class=dateNumber>"+dateNo+"<div id=day"+dateNo+"></div></div>";
+      var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id=day"+dateNo+">2WHY HELLO THERE DEBUGGING TEST LOTS OF CONTENT</div>";
       document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
     }
   }
-  else (mm == 4 || mm == 6 || mm == 9 || mm == 11)
+  else
   {
     var i = 0;
     for (i = 0; i < 28; i++) {
       var dateNo = 1+i;
-      var dateContainer = "<div class=dateNumber>"+dateNo+"<div id=day"+dateNo+"></div></div>";
+      var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id=day"+dateNo+">WHY HELLO THERE DEBUGGING TEST LOTS OF CONTENT</div>";
       document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
     }
   }
+  //1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
+
+
   //caldiv.innerHTML = htmlString;
   //display.innerHTML += img;
   calDirectory[KEY_1] = mainPage.init.bind(mainPage);
