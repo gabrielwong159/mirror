@@ -225,6 +225,15 @@ img.buspaper {
   margin-top: 30.5%;
   text-align: center;
 }
+
+iframe.calendar {
+  border: 0;
+  width: 1420px;
+  height: 2500px;
+  position: absolute;
+  margin-top: 0px;
+  background-color:	#000000
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -331,6 +340,7 @@ img.buspaper {
                                    http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
+
     }
 
     a,

@@ -16,6 +16,7 @@ const mainDirectory = {
 	[KEY_2]: busPage.init.bind(busPage),
 	[KEY_3]: newsPage.init.bind(newsPage),
 	[KEY_4]: dirPage.init.bind(dirPage),
+  [KEY_5]: calPage.init.bind(calPage),
 };
 
 var mainPage = new Page("main", mainInit, null, mainDirectory);
@@ -31,6 +32,7 @@ function loadMain() {
 	showBox("main");
 	showBox("motd");
 	hideBox("busdiv");
+  hideBox("caldiv");
 }
 
 mainPage.init();
