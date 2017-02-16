@@ -60,8 +60,21 @@ function loadCalendar() {
   hideBox("main");
   hideBox("motd");
   showBox("caldiv");
+  //THIS STUFF PROCESSES MY EVENTS FROM MY GOOGLE CALENDAR, RETURNS IN JSON
+  /*var scriptString = new XMLHttpRequest();
+     scriptString.open('GET', 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI');
+     scriptString.onload = function() {
+       console.log(scriptString.responseText);
+       var calData = jQuery.parseJSON(scriptString.responseText);
+       var calHtml='';
 
-//THIS DEFINES OUR CALENDAR
+       for (var obj in calData.items) {
+         caldiv.innerHTML = calData.items[obj].description;
+         caldiv[dateParsing(calData.items.[obj].DATE)].innerHTML;
+       }
+     };
+     scriptString.send();
+     */
   var dateJS = Date.parse('1/1/2017');
   console.log("getDay returns:" + dateJS.getDay());
   console.log("Today is " + Date() + " and it is a " + Date.today().getDayName() + ".");
@@ -82,7 +95,6 @@ function loadCalendar() {
   console.log(monthsFirstDate);
   document.getElementById('calendar1').contentWindow.document.getElementById("monthAndYear").innerHTML = months[mm] + " " + yyyy;
   console.log(mm);
-  //this defines my calendar date system
   if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12)
   {
     var i = 0;
@@ -111,28 +123,44 @@ function loadCalendar() {
     }
   }
   //1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
-  var dayBox = "day"+dd;
-  document.getElementById('calendar1').contentWindow.document.getElementById(dayBox).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
-  //THIS STUFF PROCESSES MY EVENTS FROM MY GOOGLE CALENDAR, RETURNS IN JSON
-  /*var scriptString = new XMLHttpRequest();
-     scriptString.open('GET', 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI');
-     scriptString.onload = function() {
-       console.log(scriptString.responseText);
-       var calData = jQuery.parseJSON(scriptString.responseText);
-       var calHtml=''
 
-       for (var obj in calData.items) {
-         caldiv.innerHTML = calData.items[obj].description;
-         caldiv[INTEGERPARSEDATE(calData.items.[obj].DATE)].innerHTML;
-       }
-     };
-   scriptString.send();
-   */
-   //END OF JSON FEED
+  var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
 
+  fetch(calendarURL)
+  .then(res => res.text())
+  .then(jsonText => JSON.parse(jsonText))
+  .then(function(json) {
+	var htmlString = [];
+  	for (var i in json.items) { //apparently (var i in json.items) does not return the item, but rather the index
+  		var event = {
+  			title: json.items[i].summary, //hence the need for json.items[i]
+  			description: json.items[i].description,
+  			location: json.items[i].location,
+  			start: new Date(json.items[i].start.dateTime),
+  			end: new Date(json.items[i].end.dateTime)
+  		};
+  		//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
 
-   //var dateJS = Date.parse('MONTH/DAY/YEAR');
-   //caldiv.innerHTML = ''
+  		//this way we can call event.<property> instead?
+      var happening[i].name = event.title
+      happening[i].desc = event.description
+      happening[i].loc = event.location
+      happening[i].date = event.start.toDateString()
+      happening[i].startTime = event.start.toLocaleTimeString()
+      happening[i].endTime = event.end.toLocaleTimeString()
+      /*htmlString+= "<p>";
+  		htmlString+= "Title: " + event.title + "<br>";
+  		htmlString+= "Description: " + event.description + "<br>";
+  		htmlString+= "Location: " + event.location + "<br>";
+  		htmlString+= "Event Date: " + event.start.toDateString() + "<br>";
+  		htmlString+= "Start Time: " + event.start.toLocaleTimeString() + "<br>";
+  		htmlString+= "End Time: " + event.end.toLocaleTimeString() + "<br>";
+  		htmlString+= "<br></p>";*/
+  	}
+
+  	document.getElementById("textbox").innerHTML = htmlString;
+  });
+
 
   //caldiv.innerHTML = htmlString;
   //display.innerHTML += img;
@@ -145,6 +173,8 @@ function loadCalendar() {
   //calDirectory[KEY_7] = downDay;
   //calDirectory[KEY_8] = select;
 }
+
+
 
 //I HAVENT EDITED THIS PAGE YET. JUST USED DIRECTIONS.JS AS A TEMPLATE.
 

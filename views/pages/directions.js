@@ -20,7 +20,7 @@ function printIDC() {
 }
 
 function printAudi() {
-  var htmlString = "<p class = 'mapsheader'> SUTD IDC. <br /> Building 1, Levels 1-2. </p>";
+  var htmlString = "<p class = 'mapsheader'> SUTD Lecture Theater 1. <br /> Building 1, Levels 1-2. </p>";
   var img = "<img src = '/img/audi.png' class = 'maps'>";
   display.innerHTML = htmlString;
   display.innerHTML += img;
