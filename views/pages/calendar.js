@@ -1,9 +1,42 @@
 var calDirectory = {
-
 };
 
 var calPage = new Page("calendar", calInit, null, calDirectory);
 
+//LOADING JSON DATA
+var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
+
+fetch(calendarURL)
+.then(res => res.text())
+.then(jsonText => JSON.parse(jsonText))
+.then(function(json) {
+var htmlString = [];
+var events = []
+	for (var i in json.items) { //apparently (var i in json.items) does not return the item, but rather the index
+		var event = {
+			title: json.items[i].summary, //hence the need for json.items[i]
+			description: json.items[i].description,
+			location: json.items[i].location,
+      date: new Date(json.items[i].start.dateTime).toDateString(),
+      datetwo: new Date(json.items[i].start.dateTime).getDate(),
+			startTime: new Date(json.items[i].start.dateTime).toLocaleTimeString(),
+			endTime: new Date(json.items[i].end.dateTime).toLocaleTimeString()
+		};
+    events.push(event)
+		//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
+		//this way we can call event.<property> instead?
+	}
+  console.log(events);
+  console.log(json.items);
+  console.log(events[0].title);
+  console.log(events[0].date);
+  console.log(events[0].datetwo);
+  console.log(events[0].startTime);
+  console.log(events[0].endTime);
+  //getDate gives DD
+});
+
+//END LOADING JSON DATA
 //sub-button functions. have to be BEFORE calInit
 function leftMonth() {
   //goes to the previous month, eg. Feb -> Jan
@@ -19,7 +52,6 @@ function rightMonth() {
   var img = "<img src = '/img/idc.png'>";
   display.innerHTML = htmlString;
   display.innerHTML += img;
-
 }
 
 function select() {
@@ -55,46 +87,27 @@ var days = {
   '0' : 'Sunday',
 }
 
-function loadCalendar() {
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+function loadCalendar(dd, mm, yyyy) {
   hideBox("info");
   hideBox("main");
   hideBox("motd");
   showBox("caldiv");
-  //THIS STUFF PROCESSES MY EVENTS FROM MY GOOGLE CALENDAR, RETURNS IN JSON
-  /*var scriptString = new XMLHttpRequest();
-     scriptString.open('GET', 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI');
-     scriptString.onload = function() {
-       console.log(scriptString.responseText);
-       var calData = jQuery.parseJSON(scriptString.responseText);
-       var calHtml='';
-
-       for (var obj in calData.items) {
-         caldiv.innerHTML = calData.items[obj].description;
-         caldiv[dateParsing(calData.items.[obj].DATE)].innerHTML;
-       }
-     };
-     scriptString.send();
-     */
   var dateJS = Date.parse('1/1/2017');
   console.log("getDay returns:" + dateJS.getDay());
   console.log("Today is " + Date() + " and it is a " + Date.today().getDayName() + ".");
   // Finding where to highlight by default, ie. today's date. Also stores today's dd, mm, yyyy.
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
-  var yyyy = today.getFullYear();
     //document.getElementById(dd).style.color = "blue";
-  console.log(Date.parse("1.20.2017").toString("dddd"));
-  console.log(Date.parse("1.22.2017").getDay("d"));
   //REMEMBER THE FORMAT IS MM/DD/YYYY. DARN AMERICANS.
   var todaysDateString = mm+"."+dd+"."+yyyy;
-  console.log(todaysDateString);
   var monthsFirstDay = mm+"."+1+"."+yyyy;
   console.log("This month's first day lands on a " + Date.parse(monthsFirstDay).toString("dddd"));
-  var monthsFirstDate = parseInt(Date.parse(monthsFirstDay).toString("d"));
-  console.log(monthsFirstDate);
+  var monthsFirstDate = parseInt(Date.parse (monthsFirstDay).toString("d"));
   document.getElementById('calendar1').contentWindow.document.getElementById("monthAndYear").innerHTML = months[mm] + " " + yyyy;
-  console.log(mm);
   if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12)
   {
     var i = 0;
@@ -113,54 +126,25 @@ function loadCalendar() {
       document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
     }
   }
+  else if (yyyy%4==0 && yyyy%100!=0)
+  {
+    var i = 0;
+    for (i = 0; i < 29; i++) {
+      var dateNo = 1+i;
+      var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id=day"+dateNo+">"+event[dateNo]+"</div>";
+      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
+    }
+  }
   else
   {
     var i = 0;
     for (i = 0; i < 28; i++) {
       var dateNo = 1+i;
-      var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id=day"+dateNo+">WHY HELLO THERE DEBUGGING TEST LOTS OF CONTENT</div>";
+      var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id=day"+dateNo+">"+event[dateNo]+"</div>";
       document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
     }
   }
   //1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
-
-  var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
-
-  fetch(calendarURL)
-  .then(res => res.text())
-  .then(jsonText => JSON.parse(jsonText))
-  .then(function(json) {
-	var htmlString = [];
-  	for (var i in json.items) { //apparently (var i in json.items) does not return the item, but rather the index
-  		var event = {
-  			title: json.items[i].summary, //hence the need for json.items[i]
-  			description: json.items[i].description,
-  			location: json.items[i].location,
-  			start: new Date(json.items[i].start.dateTime),
-  			end: new Date(json.items[i].end.dateTime)
-  		};
-  		//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
-
-  		//this way we can call event.<property> instead?
-      var happening[i].name = event.title
-      happening[i].desc = event.description
-      happening[i].loc = event.location
-      happening[i].date = event.start.toDateString()
-      happening[i].startTime = event.start.toLocaleTimeString()
-      happening[i].endTime = event.end.toLocaleTimeString()
-      /*htmlString+= "<p>";
-  		htmlString+= "Title: " + event.title + "<br>";
-  		htmlString+= "Description: " + event.description + "<br>";
-  		htmlString+= "Location: " + event.location + "<br>";
-  		htmlString+= "Event Date: " + event.start.toDateString() + "<br>";
-  		htmlString+= "Start Time: " + event.start.toLocaleTimeString() + "<br>";
-  		htmlString+= "End Time: " + event.end.toLocaleTimeString() + "<br>";
-  		htmlString+= "<br></p>";*/
-  	}
-
-  	document.getElementById("textbox").innerHTML = htmlString;
-  });
-
 
   //caldiv.innerHTML = htmlString;
   //display.innerHTML += img;
