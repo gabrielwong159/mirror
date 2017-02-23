@@ -1,0 +1,77 @@
+{
+ "kind": "calendar#events",
+ "etag": "\"p32o8bhfhp6ed20g\"",
+ "summary": "sutd.app@gmail.com",
+ "updated": "2016-12-30T18:46:20.814Z",
+ "timeZone": "Asia/Singapore",
+ "accessRole": "reader",
+ "defaultReminders": [],
+ "nextSyncToken": "CLCFxfHJnNECEAAYAQ==",
+ "items": [
+  {
+   "kind": "calendar#event",
+   "etag": "\"2961234902598000\"",
+   "id": "85l4r67o831vg68fi4dfn7196g",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=ODVsNHI2N284MzF2ZzY4Zmk0ZGZuNzE5Nmcgc3V0ZC5hcHBAbQ",
+   "created": "2016-12-01T18:37:31.000Z",
+   "updated": "2016-12-01T18:37:31.299Z",
+   "description": "hello",
+   "creator": {
+    "email": "gabrielwong159@gmail.com",
+    "displayName": "Gabriel Wong"
+   },
+   "organizer": {
+    "email": "sutd.app@gmail.com",
+    "self": true
+   },
+   "start": {
+    "dateTime": "2016-12-02T03:00:00+08:00"
+   },
+   "end": {
+    "dateTime": "2016-12-02T04:00:00+08:00"
+   },
+   "iCalUID": "85l4r67o831vg68fi4dfn7196g@google.com",
+   "sequence": 0
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"2961285100086000\"",
+   "id": "frjganbnf2qup677a7h4dgonds",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=ZnJqZ2FuYm5mMnF1cDY3N2E3aDRkZ29uZHMgc3V0ZC5hcHBAbQ",
+   "created": "2016-11-27T08:19:58.000Z",
+   "updated": "2016-12-02T01:35:50.043Z",
+   "summary": "eVenture Presentation",
+   "description": "http://i.imgur.com/kuQmvKJ.png\nEntrepreneurship Venture Final Presentation",
+   "location": "TT21 2.310",
+   "creator": {
+    "email": "sutd.app@gmail.com",
+    "self": true
+   },
+   "organizer": {
+    "email": "sutd.app@gmail.com",
+    "self": true
+   },
+   "start": {
+    "dateTime": "2016-12-02T15:00:00+08:00"
+   },
+   "end": {
+    "dateTime": "2016-12-02T17:30:00+08:00"
+   },
+   "visibility": "public",
+   "iCalUID": "frjganbnf2qup677a7h4dgonds@google.com",
+   "sequence": 0,
+   "guestsCanInviteOthers": false,
+   "guestsCanSeeOtherGuests": false,
+   "attachments": [
+    {
+     "fileUrl": "https://drive.google.com/file/d/0B9-NkBYWQbRPYkw2TENkenBiNEE/view?usp=drive_web",
+     "title": "react-native.png",
+     "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png",
+     "fileId": "0B9-NkBYWQbRPYkw2TENkenBiNEE"
+    }
+   ]
+  }
+ ]
+}
