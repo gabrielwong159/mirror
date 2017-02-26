@@ -91,6 +91,10 @@ var days = {
   '0' : 'Sunday',
 }
 
+function updateCalendar(dd, mm, yyyy) {
+	
+}
+
 function loadCalendar(dd, mm, yyyy) {
   hideBox("info");
   hideBox("main");
@@ -139,19 +143,20 @@ function loadCalendar(dd, mm, yyyy) {
       document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
     }
   }
-  else
+  else if (mm==2)
   {
     var i = 0;
     for (i = 0; i < 28; i++) {
       var dateNo = 1+i;
-			var slashString = Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('mm')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('dd')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
+			console.log(mm);
+			var slashString = mm+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('dd')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
 			var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id="+slashString+">yes</div>";
       document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
     }
   }
   //1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
   var dayBox = "day"+dd;
-  document.getElementById('calendar1').contentWindow.document.getElementById(dayBox).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
+  document.getElementById('calendar1').contentWindow.document.getElementById(mm+"/"+dd+"/"+yyyy).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
 
   //caldiv.innerHTML = htmlString;
   //display.innerHTML += img;
