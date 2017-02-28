@@ -1,57 +1,69 @@
 var calDirectory = {
 };
-
 var calPage = new Page("calendar", calInit, null, calDirectory);
+function localeTimeStringConverter(string) {
+	var returnvar = Date.parse(string).toString('h')+':'+ Date.parse(string).toString('mm') + ' ' + string[string.length-2] + string[string.length-1]
+	return returnvar
+}
 
-//LOADING JSON DATA
-var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
-
-fetch(calendarURL)
-.then(res => res.text())
-.then(jsonText => JSON.parse(jsonText))
-.then(function(json) {
-var htmlString = [];
-var events = []
-	for (var i in json.items) { //apparently (var i in json.items) does not return the item, but rather the index
-		var event = {
-			title: json.items[i].summary, //hence the need for json.items[i]
-			description: json.items[i].description,
-			location: json.items[i].location,
-      date: new Date(json.items[i].start.dateTime).toDateString(),
-      datetwo: new Date(json.items[i].start.dateTime).getDate(),
-			startTime: new Date(json.items[i].start.dateTime).toLocaleTimeString(),
-			endTime: new Date(json.items[i].end.dateTime).toLocaleTimeString()
-		};
-    events.push(event)
-		//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
-		//this way we can call event.<property> instead?
-	}
+function updateCalendar(calendarURL,mm,yyyy){
+	fetch(calendarURL)
+	.then(res => res.text())
+	.then(jsonText => JSON.parse(jsonText))
+	.then(function(json) {
+	var htmlString = [];
+	var events = []
+		for (var i in json.items) { //apparently (var i in json.items) does not return the item, but rather the index
+			var event = {
+				title: json.items[i].summary, //hence the need for json.items[i]
+				description: json.items[i].description,
+				location: json.items[i].location,
+	      date: new Date(json.items[i].start.dateTime).toDateString(),
+	      datetwo: new Date(json.items[i].start.dateTime).getDate(),
+				startTime: new Date(json.items[i].start.dateTime).toLocaleTimeString(),
+				endTime: new Date(json.items[i].end.dateTime).toLocaleTimeString()
+			};
+	    events.push(event)
+			//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
+			//this way we can call event.<property> instead?
+		}
   console.log(events);
   console.log(json.items);
   console.log(events[0].title);
-  console.log(events[0].date);
-  console.log(events[0].datetwo);
-  console.log(events[0].startTime);
-  console.log(events[0].endTime);
-  //getDate gives DD
-});
-
-//END LOADING JSON DATA
+  console.log(Date.parse(events[0].date).toString('MM')+'/'+Date.parse(events[0].date).toString('dd')+'/'+Date.parse(events[0].date).toString('yyyy'));
+	console.log(events[1].date);
+  console.log(events[1].startTime);
+  console.log(events[1].endTime);
+	console.log(localeTimeStringConverter(events[0].startTime))
+	//CHECK IF CURRENT MONTH HAS ANY EVENTS
+	for (var i=0;i<	events.length;i++)
+		if (Date.parse(events[i].date).toString('M') == mm && Date.parse(events[i].date).toString('yyyy') == yyyy) {
+			var parsedDate = Date.parse(events[i].date).toString('M')+'/'+Date.parse(events[i].date).toString('dd')+'/'+Date.parse(events[i].date).toString('yyyy')
+			console.log(parsedDate);
+			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += events[i].title;
+	}
+	  //getDate gives DD
+	});
+}
 //sub-button functions. have to be BEFORE calInit
-function leftMonth() {
+function leftMonth(dd,mm,yyyy) {
   //goes to the previous month, eg. Feb -> Jan
-  var htmlString = "<p class = 'header'> SUTD Canteen. 2.201 </p>";
-  var img = "<img src = '/img/canteen.png'>";
-  display.innerHTML = htmlString;
-  display.innerHTML += img;
+	if (mm == 1){
+		loadCalendar(dd,12,yyyy-1);
+	}
+	else {
+		loadCalendar(dd,mm-1,yyyy);
+	}
 }
 
-function rightMonth() {
-  //goes to the next month, eg. Feb -> Mar
-  var htmlString = "<p class = 'header'> IDC SUTD. 3.101 </p>";
-  var img = "<img src = '/img/idc.png'>";
-  display.innerHTML = htmlString;
-  display.innerHTML += img;
+
+function rightMonth(dd,mm,yyyy) {
+	if (mm == 12){
+		loadCalendar(dd,1,yyyy+1);
+	}
+	else {
+		loadCalendar(dd,mm+1,yyyy);
+	}
 }
 
 function select() {
@@ -91,22 +103,13 @@ var days = {
   '0' : 'Sunday',
 }
 
-function updateCalendar(dd, mm, yyyy) {
-	
-}
-
 function loadCalendar(dd, mm, yyyy) {
   hideBox("info");
   hideBox("main");
   hideBox("motd");
   showBox("caldiv");
 
-  var dateJS = Date.parse('1/1/2017');
-  console.log("getDay returns:" + dateJS.toString("dddd"));
   console.log("Today is " + Date() + " and it is a " + Date.today().getDayName() + ".");
-  // Finding where to highlight by default, ie. today's date. Also stores today's dd, mm, yyyy.
-    //document.getElementById(dd).style.color = "blue";
-  //REMEMBER THE FORMAT IS MM/DD/YYYY. DARN AMERICANS.
   var todaysDateString = mm+"."+dd+"."+yyyy;
   var monthsFirstDay = mm+"."+1+"."+yyyy;
   console.log("This month's first day lands on a " + Date.parse(monthsFirstDay).toString("dddd"));
@@ -148,21 +151,23 @@ function loadCalendar(dd, mm, yyyy) {
     var i = 0;
     for (i = 0; i < 28; i++) {
       var dateNo = 1+i;
-			console.log(mm);
 			var slashString = mm+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('dd')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
-			var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id="+slashString+">yes</div>";
+			var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id="+slashString+"></div>";
       document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
     }
   }
+	// Finding where to highlight by default, ie. today's date. Also stores today's dd, mm, yyyy.
+  document.getElementById('calendar1').contentWindow.document.getElementById(mm+"/"+dd+"/"+yyyy).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
+  //REMEMBER THE FORMAT IS MM/DD/YYYY. DARN AMERICANS.
   //1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
   var dayBox = "day"+dd;
-  document.getElementById('calendar1').contentWindow.document.getElementById(mm+"/"+dd+"/"+yyyy).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
-
+	var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
+	updateCalendar(calendarURL, mm, yyyy);
   //caldiv.innerHTML = htmlString;
   //display.innerHTML += img;
   calDirectory[KEY_1] = mainPage.init.bind(mainPage);
-  calDirectory[KEY_2] = leftMonth;
-  calDirectory[KEY_3] = rightMonth;
+  calDirectory[KEY_2] = leftMonth.bind(dd,mm,yyyy);
+  calDirectory[KEY_3] = rightMonth.bind(dd,mm,yyyy);
   //calDirectory[KEY_4] = leftDay;
   //calDirectory[KEY_5] = rightDay;
   //calDirectory[KEY_6] = upDay;
