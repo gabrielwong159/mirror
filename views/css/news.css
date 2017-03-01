@@ -7,17 +7,37 @@ img.newsPic {
 	margin: 0;
 }
 
+img.left {
+	float: left;
+	margin-right: 40px;
+}
+
+img.right {
+	float: right;
+	margin-left: 40px;
+}
+
+div.newsItemContainer {
+	overflow: auto;
+	margin-bottom: 75px;
+}
+
 div#newsDisplay {
 	margin-top: 200px;
 }
 
 p#newsTitle {
-	font-size: 16px;
+	font-size: 32px;
 	text-decoration: underline;
 
 	margin-bottom: 0;
 }
 
 p#newsDescription {
+	font-size: 24px;
+	text-align: justify;
+	text-justify: inter-word;
+
+	margin: 20px;
 	margin-top: 0;
 }

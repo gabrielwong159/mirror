@@ -1,31 +1,50 @@
-var newsPage = new Page("news", newsInit, null);
+var newsPage = new Page("news", newsInit, newsStop);
+
 const URL = 'http://www.channelnewsasia.com/starterkit/servlet/cna/rss/home.xml';
 //const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
 
+var newsJson = null;
+
+var newsItemPage = 0;
+
 function newsInit() {
 	loadNews();
+	document.addEventListener("keydown", newsKeyEvent);
 }
 
-var json;
+function newsStop() {
+	document.removeEventListener("keydown", newsKeyEvent);
+}
+
+function newsKeyEvent(event) {
+	if (event.which == KEY_2) newsItemPage = (newsItemPage+1)%2;
+	
+	if (newsItemPage == 0) fetchNews(newsJson, "<div id='newsDisplay'>", 8, 12);
+	else fetchNews(newsJson, "<div id='newsDisplay'>", 12, 16);
+}
 
 function loadNews() {
+	$display.innerHTML = "<img src='/img/newsLoading.gif' width=800px height=800px>";
+
 	fetch(URL)
 	.then(res => res.text())
 	.then(xmlText => xml2json(parseXml(xmlText), "  "))
 	.then(jsonString => JSON.parse(jsonString))
-	.then(function(jsonObj) {	
-		json = jsonObj;	
-		fetchNews(jsonObj, "<div id='newsDisplay'>", 8);
+	.then(function(jsonObj) {
+		newsJson = jsonObj;
+		fetchNews(newsJson, "<div id='newsDisplay'>", 8, 12); // 8-18 for all 10 entries
 	})
 	.catch((err) => {
-		$display.innerHTML = `<div id='error'>Yesss: ${err}</div>`;
+		$display.innerHTML = "<div id='error'>Yesss: ${err}</div>";
 	});
 }
 
-function fetchNews(jsonObj, htmlString, counter) {
-	if (counter == 18) {
+function fetchNews(jsonObj, htmlString, counter, last) {
+	if (counter == last) {
 		htmlString+= "</div>";
 		$display.innerHTML = htmlString;
+
+		return null;
 	}
 
 	var item = jsonObj.rss.channel[counter].item;
@@ -49,11 +68,13 @@ function fetchNews(jsonObj, htmlString, counter) {
 			}
 		}
 
-		htmlString+= "<a href='" + url + "'><p id='newsTitle'>" + title + "</p></a><p id='newsDescription'>" + description + "</p><br>";
-		htmlString+= '<img class="newsPic" src="' + imageUrl + '">';
+		htmlString+= "<div class='newsItemContainer'>";
+		htmlString+= '<img class="newsPic ' + (counter%2 ? 'left':'right') + '" src="' + imageUrl + '">';
+		htmlString+= "<div class='newsText'><a href='" + url + "'><p id='newsTitle'>" + title + "</p></a><p id='newsDescription'>" + description + "</p><br></div>";
+		htmlString+= "</div>";
 	})
 	.then(function() {
-		return htmlString+= fetchNews(jsonObj, htmlString, counter+1);
+		return htmlString+= fetchNews(jsonObj, htmlString, counter+1, last);
 	});
 
 }

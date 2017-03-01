@@ -16,7 +16,7 @@ const mainDirectory = {
 	[KEY_2]: busPage.init.bind(busPage),
 	[KEY_3]: newsPage.init.bind(newsPage),
 	[KEY_4]: dirPage.init.bind(dirPage),
-  [KEY_5]: calPage.init.bind(calPage),
+	[KEY_5]: calPage.init.bind(calPage)
 };
 
 var mainPage = new Page("main", mainInit, null, mainDirectory);
@@ -26,13 +26,12 @@ function mainInit() {
 }
 
 function loadMain() {
-
 	$display.innerHTML = "<img src='/img/idcwelcome.png'>";
 	showBox("info");
 	showBox("main");
 	showBox("motd");
 	hideBox("busdiv");
-  hideBox("caldiv");
+ 	hideBox("caldiv");
 }
 
 mainPage.init();

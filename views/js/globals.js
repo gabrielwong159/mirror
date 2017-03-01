@@ -14,6 +14,6 @@ const KEY_RIGHT = 39;
 
 // will hold ref to current page instance
 let currentPage;
-const defaultDirectory = {};
+var defaultDirectory = {};
 
 var $display = document.getElementById('display');

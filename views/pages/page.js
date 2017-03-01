@@ -13,4 +13,8 @@ function Page(name, init, stop, directory = defaultDirectory) {
 		currentPage = this;
 		init();
 	}
+
+	this.setDirectory = function(directory) {
+		this.directory = directory;
+	}
 }
