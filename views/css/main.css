@@ -186,8 +186,6 @@ img.maps {
 
 #busdiv {
   display: block;
-  width: 100%;
-  height: 100%;
   vertical-align: top;
   align-self: auto;
 }
@@ -234,7 +232,7 @@ img.buspaper {
 iframe.calendar {
   border: 0;
   width: 1420px;
-  height: 2500px;
+  /*height: 2500px;*/
   position: absolute;
   margin-top: 0px;
   background-color:	#000000
