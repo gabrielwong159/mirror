@@ -35,7 +35,7 @@ function updateCalendar(calendarURL,mm,yyyy){
 		if (Date.parse(events[i].date).toString('M') == mm && Date.parse(events[i].date).toString('yyyy') == yyyy) {
 			var parsedDate = Date.parse(events[i].date).toString('M')+'/'+Date.parse(events[i].date).toString('d')+'/'+Date.parse(events[i].date).toString('yyyy')
 			console.log(parsedDate);
-			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += "<div class = timeSlot><div class = word>" + localeTimeStringConverter(events[i].startTime) + "</div></div>"
+			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += "<div class = timeSlot><div class = word>" + localeTimeStringConverter(events[i].startTime) + " to " + localeTimeStringConverter(events[i].endTime) + "</div></div>"
 			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += "<div class = titleSlot><div class = word>" + events[i].title + "</div></div>";
 	}
 	  //getDate gives DD

@@ -14,7 +14,7 @@ html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
-    height:2560px;
+    height:2800px;
     width:1440px;
     border-width: 5px;
     border-color: white;
@@ -60,7 +60,6 @@ hr {
 
 audio,
 canvas,
-iframe,
 img,
 svg,
 video {
@@ -71,6 +70,12 @@ video {
     margin-right: auto;
 }
 
+iframe {
+    vertical-align: middle;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
 /*
  * Remove default fieldset styles.
  */
