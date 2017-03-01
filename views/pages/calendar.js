@@ -157,7 +157,9 @@ function loadCalendar(dd, mm, yyyy) {
     }
   }
 	// Finding where to highlight by default, ie. today's date. Also stores today's dd, mm, yyyy.
-  document.getElementById('calendar1').contentWindow.document.getElementById(mm+"/"+dd+"/"+yyyy).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
+  if (mm == today.getMonth()+1) {
+		document.getElementById('calendar1').contentWindow.document.getElementById(mm+"/"+dd+"/"+yyyy).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
+	}
   //REMEMBER THE FORMAT IS MM/DD/YYYY. DARN AMERICANS.
   //1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
   var dayBox = "day"+dd;
