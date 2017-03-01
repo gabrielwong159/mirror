@@ -27,44 +27,21 @@ function updateCalendar(calendarURL,mm,yyyy){
 			//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
 			//this way we can call event.<property> instead?
 		}
-  console.log(events);
-  console.log(json.items);
-  console.log(events[0].title);
-  console.log(Date.parse(events[0].date).toString('MM')+'/'+Date.parse(events[0].date).toString('dd')+'/'+Date.parse(events[0].date).toString('yyyy'));
-	console.log(events[1].date);
-  console.log(events[1].startTime);
-  console.log(events[1].endTime);
-	console.log(localeTimeStringConverter(events[0].startTime))
 	//CHECK IF CURRENT MONTH HAS ANY EVENTS
-	for (var i=0;i<	events.length;i++)
+	for (var i=0;i<events.length;i++){
+		console.log(events[i].date);
+	}
+	for (var i=0;i<events.length;i++)
 		if (Date.parse(events[i].date).toString('M') == mm && Date.parse(events[i].date).toString('yyyy') == yyyy) {
-			var parsedDate = Date.parse(events[i].date).toString('M')+'/'+Date.parse(events[i].date).toString('dd')+'/'+Date.parse(events[i].date).toString('yyyy')
+			var parsedDate = Date.parse(events[i].date).toString('M')+'/'+Date.parse(events[i].date).toString('d')+'/'+Date.parse(events[i].date).toString('yyyy')
 			console.log(parsedDate);
-			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += events[i].title;
+			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += "<div class = timeSlot><div class = word>" + localeTimeStringConverter(events[i].startTime) + "</div></div>"
+			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += "<div class = titleSlot><div class = word>" + events[i].title + "</div></div>";
 	}
 	  //getDate gives DD
 	});
 }
 //sub-button functions. have to be BEFORE calInit
-function leftMonth(dd,mm,yyyy) {
-  //goes to the previous month, eg. Feb -> Jan
-	if (mm == 1){
-		loadCalendar(dd,12,yyyy-1);
-	}
-	else {
-		loadCalendar(dd,mm-1,yyyy);
-	}
-}
-
-
-function rightMonth(dd,mm,yyyy) {
-	if (mm == 12){
-		loadCalendar(dd,1,yyyy+1);
-	}
-	else {
-		loadCalendar(dd,mm+1,yyyy);
-	}
-}
 
 function select() {
   //Selects date cursor is currently hovering over, enters DAY SCREEN
@@ -103,78 +80,112 @@ var days = {
   '0' : 'Sunday',
 }
 
+var dayW = {
+	'Monday' : '1',
+	'Tuesday' : '2',
+	'Wednesday' : '3',
+	'Thursday' : '4',
+	'Friday' : '5',
+	'Saturday': '6',
+	'Sunday' : '0'
+}
 function loadCalendar(dd, mm, yyyy) {
-  hideBox("info");
+  //hideBox("info");
   hideBox("main");
   hideBox("motd");
   showBox("caldiv");
 
-  console.log("Today is " + Date() + " and it is a " + Date.today().getDayName() + ".");
   var todaysDateString = mm+"."+dd+"."+yyyy;
   var monthsFirstDay = mm+"."+1+"."+yyyy;
+	console.log(monthsFirstDay);
   console.log("This month's first day lands on a " + Date.parse(monthsFirstDay).toString("dddd"));
-  var monthsFirstDate = parseInt(Date.parse (monthsFirstDay).toString("d"));
+  var monthsFirstDate = Date.parse(monthsFirstDay).toString("dddd");
   document.getElementById('calendar1').contentWindow.document.getElementById("monthAndYear").innerHTML = months[mm] + " " + yyyy;
 
+	for (i=1; i<43;i++){
+		document.getElementById('calendar1').contentWindow.document.getElementById(i).innerHTML = ' '
+		document.getElementById('calendar1').contentWindow.document.getElementById(i).parentElement.style.background = "transparent";
+	}
   if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12)
   {
     var i = 0;
     for (i = 0; i < 31; i++) {
-      var dateNo = 1+i;
-			var slashString = Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('mm')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('dd')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
-      var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id=day"+dateNo+">1WHY HELLO THERE DEBUGGING TEST LOTS OF CONTENT</div>";
-      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
+			var dateNo = 1+i;
+			var slashString = mm+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('d')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
+			var dateContainer = "<div class=dateNumber><span><div class=dateWord>"+dateNo+"</div></span></div><div id="+slashString+"></div>";
+      document.getElementById('calendar1').contentWindow.document.getElementById(parseInt(dayW[monthsFirstDate])+i+1).innerHTML = dateContainer;
     }
   }
   else if (mm == 4 || mm == 6 || mm == 9 || mm == 11)
   {
     var i = 0;
     for (i = 0; i < 30; i++) {
-      var dateNo = 1+i;
-			var slashString = Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('mm')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('dd')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
-			var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id="+dateNo+">2WHY HELLO THERE DEBUGGING TEST LOTS OF CONTENT</div>";
-      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
+			var dateNo = 1+i;
+			var slashString = mm+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('d')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
+			var dateContainer = "<div class=dateNumber><span><div class=dateWord>"+dateNo+"</div></span></div><div id="+slashString+"></div>";
+      document.getElementById('calendar1').contentWindow.document.getElementById(parseInt(dayW[monthsFirstDate])+i+1).innerHTML = dateContainer;
     }
   }
   else if (yyyy%4==0 && yyyy%100!=0)
   {
     var i = 0;
     for (i = 0; i < 29; i++) {
-      var dateNo = 1+i;
-			var slashString = Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('mm')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('dd')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
-			var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id=day"+dateNo+">YES</div>";
-      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
+			var dateNo = 1+i;
+			var slashString = mm+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('d')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
+			var dateContainer = "<div class=dateNumber><div class=dateWord>"+dateNo+"</div></div><div id="+slashString+"></div>";
+      document.getElementById('calendar1').contentWindow.document.getElementById(parseInt(dayW[monthsFirstDate])+i+1).innerHTML = dateContainer;
     }
   }
   else if (mm==2)
   {
     var i = 0;
     for (i = 0; i < 28; i++) {
-      var dateNo = 1+i;
-			var slashString = mm+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('dd')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
-			var dateContainer = "<div class=dateNumber>"+dateNo+"</div><div id="+slashString+"></div>";
-      document.getElementById('calendar1').contentWindow.document.getElementById(monthsFirstDate+i).innerHTML = dateContainer;
+			var dateNo = 1+i;
+			var slashString = mm+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('d')+'/'+Date.parse(mm+'/'+dateNo+'/'+yyyy).toString('yyyy')
+			var dateContainer = "<div class=dateNumber><div class=dateWord>"+dateNo+"</div></div><div id="+slashString+"></div>";
+      document.getElementById('calendar1').contentWindow.document.getElementById(parseInt(dayW[monthsFirstDate])+i+1).innerHTML = dateContainer;
     }
   }
 	// Finding where to highlight by default, ie. today's date. Also stores today's dd, mm, yyyy.
-  if (mm == today.getMonth()+1) {
+	console.log(mm+"/"+dd+"/"+yyyy);
+	var todayMonth = new Date()
+	if (mm == todayMonth.getMonth()+1 && yyyy==todayMonth.getFullYear()) {
 		document.getElementById('calendar1').contentWindow.document.getElementById(mm+"/"+dd+"/"+yyyy).parentElement.parentElement.style.background = "rgba(111,111,111,0.5)";
 	}
   //REMEMBER THE FORMAT IS MM/DD/YYYY. DARN AMERICANS.
   //1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
-  var dayBox = "day"+dd;
 	var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
-	updateCalendar(calendarURL, mm, yyyy);
-  //caldiv.innerHTML = htmlString;
-  //display.innerHTML += img;
+  function leftMonth(day,month,year) {
+	  //goes to the previous month, eg. Feb -> Jan
+		console.log(day);
+		console.log(month);
+		console.log(year);
+		if (month == 1){
+			loadCalendar(day,12,year-1);
+		}
+		else {
+			loadCalendar(day,month-1,year);
+		}
+	}
+
+	function rightMonth(dd,mm,yyyy) {
+		if (mm == 12){
+			loadCalendar(dd,1,yyyy+1);
+		}
+		else {
+			loadCalendar(dd,mm+1,yyyy);
+		}
+	}
   calDirectory[KEY_1] = mainPage.init.bind(mainPage);
-  calDirectory[KEY_2] = leftMonth.bind(dd,mm,yyyy);
-  calDirectory[KEY_3] = rightMonth.bind(dd,mm,yyyy);
+  calDirectory[KEY_2] = leftMonth.bind(null,dd,mm,yyyy);
+  calDirectory[KEY_3] = rightMonth.bind(null,dd,mm,yyyy);
   //calDirectory[KEY_4] = leftDay;
   //calDirectory[KEY_5] = rightDay;
   //calDirectory[KEY_6] = upDay;
   //calDirectory[KEY_7] = downDay;
   //calDirectory[KEY_8] = select;
+	updateCalendar(calendarURL, mm, yyyy);
+	console.log(mm);
 }
 
 //SAMPLE AJAX CODE FOR FUTURE REFERENCE
