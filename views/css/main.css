@@ -113,28 +113,6 @@ body {
     color: #F8F8FF;
 }
 
-#info {
-    width: 100%;
-    margin: auto;
-    height:320px;
-    padding: 0px;
-    font-weight: bold;
-}
-
-#date {
-    float: left;
-    width: 300px;
-}
-
-#date p:first-child {
-    font-size: 1.85em;
-}
-
-#time {
-    font-size: 6em;
-    margin-top: 0;
-}
-
 #main {
 	width: 100%;
 	height: 1270px;
@@ -180,52 +158,6 @@ img.maps {
   max-width: 1240px;
   position: absolute;
   margin-top: 3%;
-}
-
-
-#busdiv {
-  display: block;
-  vertical-align: top;
-  align-self: auto;
-}
-
-img.buspaper {
-  height: 100%;
-  position: absolute;
-  vertical-align: top;
-  margin-top: 0px;
-  resize:vertical;
-  margin-left: 0px;
-  max-height: 2560px;
-  max-width: 1430px;
-}
-
-.bus {
-  font-size: 60px;
-  text-align: center;
-  font-family: 'Arial';
-  position: relative;
-  margin-top: 20%;
-  width: 100%;
-  display: flex;
-  vertical-align: top;
-}
-
-#bus2container {
-  width: 33%;
-  margin-top: 30.5%;
-  margin-left: 2%;
-  text-align: center;
-}
-#bus24container {
-  width: 45%;
-  margin-top: 30.5%;
-  text-align: center;
-}
-#bus5container {
-  width: 33%;
-  margin-top: 30.5%;
-  text-align: center;
 }
 
 iframe.calendar {

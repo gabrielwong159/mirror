@@ -1,0 +1,47 @@
+#busdiv {
+  display: block;
+  vertical-align: top;
+  align-self: auto;
+
+  width: 100%;
+  height: 100%;
+}
+
+img.buspaper {
+  height: 100%;
+  position: absolute;
+  left: 35px;
+  margin-top: 0px;
+  resize:vertical;
+  max-height: 2560px;
+  max-width: 1430px;
+}
+
+.bus {
+  font-size: 60px;
+  text-align: center;
+  font-family: 'Arial';
+  position: relative;
+  margin-top: 15%;
+  width: 100%;
+  display: flex;
+  vertical-align: top;
+  justify-content: center;
+}
+
+#bus2container {
+  width: 33%;
+  margin-top: 30.5%;
+  margin-left: 2%;
+  text-align: center;
+}
+#bus24container {
+  width: 33%;
+  margin-top: 30.5%;
+  text-align: center;
+}
+#bus5container {
+  width: 33%;
+  margin-top: 30.5%;
+  text-align: center;
+}

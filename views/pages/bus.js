@@ -18,7 +18,7 @@ function loadBus() {
 	hideBox("main");
 	hideBox("motd");
 	showBox("busdiv");
-	
+
 	var jsonString = retrieve(96049);
 	var data = JSON.parse(jsonString);
 
@@ -31,6 +31,9 @@ function loadBus() {
 		outputString+= + parseInt(data.services[bus].next.duration_ms/60000) + " minutes";
 		outputString+= " <br /> and <br /> " + parseInt(data.services[bus].subsequent.duration_ms/60000) + " minutes</p>";
 	}
+
+	//outputString+= "<div id='simeiContainer'><p>" + parseInt(data.services[0].next.duration_ms/60000) + "</p></div>"
+
 	outputString+= "</div>";
 
 	busdiv.innerHTML = wallpaper;

@@ -35,15 +35,15 @@ body {
 
 #date {
     float: left;
-    width: 300px;
 }
 
 #date p:first-child {
-    font-size: 1.85em;
+    font-size: 4em;
+    margin-bottom: 0;
 }
 
 #time {
-    font-size: 6em;
+    font-size: 10em;
     margin-top: 0;
 }
 

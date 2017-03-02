@@ -5,29 +5,13 @@ const mainSidebar = {
 	left: {
 		1: '',
 		2: 'News',
-		3: '',
+		3: 'Calendar',
 		4: ''
 	},
 
 	right: {
 		1: 'Bus',
-		2: '',
-		3: '',
-		4: ''
-	}
-};
-
-const busSidebar = {
-	left: {
-		1: 'Back',
-		2: '',
-		3: '',
-		4: ''
-	},
-
-	right: {
-		1: '',
-		2: '',
+		2: 'Directions',
 		3: '',
 		4: ''
 	}
@@ -59,7 +43,6 @@ function loadSidebar(pageType) {
 	var rightHtml = "";
 
 	if (pageType == "main") sidebar = mainSidebar;
-	else if (pageType == "bus") sidebar = busSidebar;
 	else if (pageType == "news") sidebar = newsSidebar;
 
 	for (var i=1; i<=4; i++) {
