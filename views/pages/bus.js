@@ -27,12 +27,16 @@ function loadBus() {
 	var outputString = "";
 	outputString+= "<div class='bus'>";
 	for (var bus in data.services) {
+		nextBus = parseInt(data.services[bus].next.duration_ms/60000);
+
 		outputString+= "<p id = bus" + data.services[bus].no + "container>";
-		outputString+= + parseInt(data.services[bus].next.duration_ms/60000) + " minutes";
+		outputString+=  nextBus>0 ? nextBus + " minutes" : "Arriving";
 		outputString+= " <br /> and <br /> " + parseInt(data.services[bus].subsequent.duration_ms/60000) + " minutes</p>";
 	}
 
-	//outputString+= "<div id='simeiContainer'><p>" + parseInt(data.services[0].next.duration_ms/60000) + "</p></div>"
+	outputString+= "<p class='locationContainer' id='simeiContainer'>" + Math.max(parseInt(data.services[0].next.duration_ms/60000), 0) + "</p>";
+	outputString+= "<p class='locationContainer' id='tanahContainer'>" + Math.max(parseInt(data.services[1].next.duration_ms/60000), 0) + "</p>";
+	outputString+= "<p class='locationContainer' id='simpangContainer'>" + Math.max(parseInt(data.services[2].next.duration_ms/60000), 0) + "</p>";
 
 	outputString+= "</div>";
 

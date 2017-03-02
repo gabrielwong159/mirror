@@ -15,6 +15,7 @@ img.buspaper {
   resize:vertical;
   max-height: 2560px;
   max-width: 1430px;
+  z-index: -1;
 }
 
 .bus {
@@ -24,6 +25,7 @@ img.buspaper {
   position: relative;
   margin-top: 15%;
   width: 100%;
+  height: 100%;
   display: flex;
   vertical-align: top;
   justify-content: center;
@@ -44,4 +46,20 @@ img.buspaper {
   width: 33%;
   margin-top: 30.5%;
   text-align: center;
+}
+
+.locationContainer {
+  position: absolute;
+  top: 1125px;
+
+  font-size: 50px;
+}
+#simeiContainer {
+  left: 260px;
+}
+#tanahContainer {
+  left: 735px;
+}
+#simpangContainer {
+  left: 1190px;
 }
