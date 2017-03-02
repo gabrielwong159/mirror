@@ -1,3 +1,4 @@
+// news page - function 3
 var newsPage = new Page("news", newsInit, newsStop);
 
 const URL = 'http://www.channelnewsasia.com/starterkit/servlet/cna/rss/home.xml';
@@ -9,6 +10,7 @@ var newsItemPage = 0;
 
 function newsInit() {
 	loadNews();
+	loadSidebar("news");
 	document.addEventListener("keydown", newsKeyEvent);
 }
 
@@ -16,15 +18,22 @@ function newsStop() {
 	document.removeEventListener("keydown", newsKeyEvent);
 }
 
+function newsPageLoading() {
+	$display.innerHTML = "<img src='/img/newsLoading.gif' width=800px height=800px>";
+}
+
 function newsKeyEvent(event) {
-	if (event.which == KEY_2) newsItemPage = (newsItemPage+1)%2;
+	if (event.which == KEY_2) {
+		newsPageLoading();
+		newsItemPage = (newsItemPage+1)%2;
 	
-	if (newsItemPage == 0) fetchNews(newsJson, "<div id='newsDisplay'>", 8, 12);
-	else fetchNews(newsJson, "<div id='newsDisplay'>", 12, 16);
+		if (newsItemPage == 0) fetchNews(newsJson, "<div id='newsDisplay'>", 8, 12);
+		else fetchNews(newsJson, "<div id='newsDisplay'>", 12, 16);
+	}
 }
 
 function loadNews() {
-	$display.innerHTML = "<img src='/img/newsLoading.gif' width=800px height=800px>";
+	newsPageLoading();
 
 	fetch(URL)
 	.then(res => res.text())

@@ -23,6 +23,7 @@ var mainPage = new Page("main", mainInit, null, mainDirectory);
 
 function mainInit() {
 	loadMain();
+	loadSidebar("main");
 }
 
 function loadMain() {

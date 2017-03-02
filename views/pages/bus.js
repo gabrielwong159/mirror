@@ -1,3 +1,5 @@
+// bus page - function 2
+
 var busPage = new Page("bus", busInit, busStop);
 
 var id;
@@ -16,6 +18,7 @@ function loadBus() {
 	hideBox("main");
 	hideBox("motd");
 	showBox("busdiv");
+	
 	var jsonString = retrieve(96049);
 	var data = JSON.parse(jsonString);
 
