@@ -2,6 +2,7 @@
   font-size: 80;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  margin-bottom:100px;
 }
 
 th.time {
@@ -12,7 +13,34 @@ th.time {
   font-weight: lighter;
 }
 
+table {
+  width:100%;
+}
+div.times {
+  width:100%;
+  font-size:60;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+
 th.event {
+  width: 50%;
+  font-size: 60;
+  text-align: right;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+
+th.events {
+  width: 50%;
+  font-size: 60;
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+
+th.locations {
   width: 50%;
   font-size: 60;
   text-align: right;
