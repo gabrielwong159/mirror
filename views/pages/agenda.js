@@ -46,8 +46,9 @@ function updateAgenda(calendarURL){
 					location: json.items[i].location,
 		      date: new Date(json.items[i].start.dateTime).toDateString(),
 		      datetwo: new Date(json.items[i].start.dateTime).getDate(),
-					startTime: new Date(json.items[i].start.dateTime).toLocaleTimeString(),
-					endTime: new Date(json.items[i].end.dateTime).toLocaleTimeString()
+					startTime: new Date(json.items[i].start.dateTime).toString('h:mm tt'),
+					endTime: new Date(json.items[i].end.dateTime).toString('h:mm tt'),
+          order: new Date(json.items[i].start.dateTime).toString('HH.mm')
 				};
 		    events.push(event)
 				//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
@@ -64,7 +65,8 @@ function updateAgenda(calendarURL){
 				'Title' : events[i]['title'],
 				'Venue' : events[i]['location'],
 				'Start' : events[i]['startTime'],
-				'End' : events[i]['endTime']
+				'End' : events[i]['endTime'],
+        'TimeValue' : events[i]['order']
 			}
 			eventsList[eventDay].push(tempy);
 		}
@@ -75,11 +77,18 @@ function updateAgenda(calendarURL){
 			console.log(eventsList[i]);
 			console.log(toDate.toString('d'+'.'+'M'+'.'+'yyyy'))
 			if(i == toDate.toString('d'+'.'+'M'+'.'+'yyyy')){
+        var order = [];
+        for (var k = 1; k < eventsList[i].length; k++){
+          //PUT ORDERING FUNCTION HERE
+          null
+        }
 				for (var j = 1; j < eventsList[i].length;j++){
           console.log(eventsList[i][j]['Start'].toString('h'));
 					document.getElementById('a'+String(j)).innerHTML = eventsList[i][j]['Start'] + ' To ' + eventsList[i][j]['End'];
 					document.getElementById('a'+String(j)+String(j)).innerHTML = eventsList[i][j]['Title'];
-          document.getElementById('a'+String(j)+String(j)+String(j)).innerHTML = eventsList[i][j]['Venue'];
+          if (eventsList[i][j]['Venue']) {
+            document.getElementById('a'+String(j)+String(j)+String(j)).innerHTML = eventsList[i][j]['Venue'];
+          }
 				}
 			}
 		}
