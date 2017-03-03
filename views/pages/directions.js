@@ -29,8 +29,16 @@ function printAudi() {
 function printFabLab() {
   var htmlString = "<p class = 'mapsheader'> SUTD Fabrication Lab. <br /> Building 5, Levels 1-2 </p>";
   var img = "<img src = '/img/fablab.png' class = 'maps'>";
+  transOut();
   display.innerHTML = htmlString;
   display.innerHTML += img;
+  setTimeout(transIn(), 100);
+}
+function transOut() {
+  main.style = "visibility: hidden; transition: visibility 0.8s linear, opacity 0.8s linear; height:0%; overflow:hidden; opacity: 0;";
+}
+function transIn() {
+  main.style = "visibility: visible; transition:opacity 0.8s linear; height:auto; overflow:hidden; opacity: 1;";
 }
 //end of page-specific functions
 
@@ -44,8 +52,10 @@ function loadDirectory() {
   $display.innerHTML = htmlString;
   display.innerHTML += img;
 	dirDirectory[KEY_1] = mainPage.init.bind(mainPage);
-	dirDirectory[KEY_2] = printCanteen;
-	dirDirectory[KEY_3] = printIDC;
+  dirDirectory[KEY_2] = loadDirectory;
+  dirDirectory[KEY_3] = printCanteen;
   dirDirectory[KEY_4] = printAudi;
   dirDirectory[KEY_5] = printFabLab;
+  dirDirectory[KEY_6] = printIDC;
+
 }
