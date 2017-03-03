@@ -1,0 +1,25 @@
+#agdHeader {
+  font-size: 80;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+th.time {
+  width:30%;
+  font-size:60;
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+
+th.event {
+  width: 50%;
+  font-size: 60;
+  text-align: right;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+
+#agTable {
+  width:100%;
+}

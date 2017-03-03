@@ -26,7 +26,7 @@ function newsKeyEvent(event) {
 	if (event.which == KEY_2) {
 		newsPageLoading();
 		newsItemPage = (newsItemPage+1)%2;
-	
+
 		if (newsItemPage == 0) fetchNews(newsJson, "<div id='newsDisplay'>", 8, 12);
 		else fetchNews(newsJson, "<div id='newsDisplay'>", 12, 16);
 	}
@@ -72,7 +72,7 @@ function fetchNews(jsonObj, htmlString, counter, last) {
 			var frontIndex = htmlText.search('<meta property="og:image" content="');
 
 			if (frontIndex>=0) {
-				var endIndex = htmlText.search('.jpg');		
+				var endIndex = htmlText.search('.jpg');
 				imageUrl = htmlText.substring(frontIndex+35, endIndex+4);
 			}
 		}
@@ -91,9 +91,9 @@ function fetchNews(jsonObj, htmlString, counter, last) {
 function parseXml(xml) {
    var dom = null;
    if (window.DOMParser) {
-      try { 
-         dom = (new DOMParser()).parseFromString(xml, "text/xml"); 
-      } 
+      try {
+         dom = (new DOMParser()).parseFromString(xml, "text/xml");
+      }
       catch (e) { dom = null; }
    }
    else if (window.ActiveXObject) {
@@ -102,7 +102,7 @@ function parseXml(xml) {
          dom.async = false;
          if (!dom.loadXML(xml)) // parse error ..
             window.alert(dom.parseError.reason + dom.parseError.srcText);
-      } 
+      }
       catch (e) { dom = null; }
    }
    else
