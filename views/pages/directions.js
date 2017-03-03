@@ -1,5 +1,4 @@
 var dirDirectory = {
-
 };
 
 var dirPage = new Page("directions", dirInit, null, dirDirectory);
@@ -49,6 +48,7 @@ function transIn() {
 
 function dirInit() {
 	loadDirectory();
+  loadSidebar("directions");
 }
 
 function loadDirectory() {
@@ -56,12 +56,11 @@ function loadDirectory() {
   var img = "<img src = '/img/school.png' class = 'maps'>";
   $display.innerHTML = htmlString;
   display.innerHTML += img;
-	dirDirectory[KEY_1] = loadDirectory;
+	dirDirectory[KEY_1] = mainPage.init.bind(mainPage);
   dirDirectory[KEY_2] = loadDirectory;
   dirDirectory[KEY_3] = printCanteen;
   dirDirectory[KEY_4] = printAudi;
   dirDirectory[KEY_5] = printAHLT;
   dirDirectory[KEY_6] = printFabLab;
-  dirDirectory[KEY_7] = mainPage.init.bind(mainPage);
 
 }
