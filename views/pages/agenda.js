@@ -12,57 +12,76 @@ function loadAgenda() {
   var dayta = new Date();
 	var agdDate = dayta.getDate() + ' ' + dayta.getMonthName()+ ' ' + dayta.getFullYear();
   var htmlString = "<div id = agdHeader> Agenda <br />"+ agdDate + "</div>";
-  htmlString += "<div id = agdTable><table id='agTable'><tr><th class='time'>Time</th><th class='event'>Event</th></tr>";
   //content
-  htmlString += "<tr><th class='times' id='a1'></th><th class='events' id='a11'></th></tr>"
-  htmlString += "<tr><th class='times' id='a2'></th><th class='events' id='a22'></th></tr>"
-  htmlString += "<tr><th class='times' id='a3'></th><th class='events' id='a33'></th></tr>"
-  htmlString += "<tr><th class='times' id='a4'></th><th class='events' id='a44'></th></tr>"
-  htmlString += "<tr><th class='times' id='a5'></th><th class='events' id='a55'></th></tr>"
-  htmlString += "<tr><th class='times' id='a6'></th><th class='events' id='a66'></th></tr>"
-  htmlString += "<tr><th class='times' id='a7'></th><th class='events' id='a77'></th></tr>"
-  htmlString += "<tr><th class='times' id='a8'></th><th class='events' id='a88'></th></tr>"
-  //endcontent
+  htmlString += "<div class='times' id='a1'></div><table><tr><th class='events' id='a11'></th><th class='locations' id='a111'></th></tr></table>"
+  htmlString += "<div class='times' id='a2'></div><table><tr><th class='events' id='a22'></th><th class='locations' id='a222'></th></tr></table>"
+  htmlString += "<div class='times' id='a3'></div><table><tr><th class='events' id='a33'></th><th class='locations' id='a333'></th></tr></table>"
+  htmlString += "<div class='times' id='a4'></div><table><tr><th class='events' id='a44'></th><th class='locations' id='a444'></th></tr></table>"
+  htmlString += "<div class='times' id='a5'></div><table><tr><th class='events' id='a55'></th><th class='locations' id='a555'></th></tr></table>"
+  htmlString += "<div class='times' id='a6'></div><table><tr><th class='events' id='a66'></th><th class='locations' id='a666'></th></tr></table>"
+  htmlString += "<div class='times' id='a7'></div><table><tr><th class='events' id='a77'></th><th class='locations' id='a777'></th></tr></table>"
+  htmlString += "<div class='times' id='a8'></div><table><tr><th class='events' id='a88'></th><th class='locations' id='a888'></th></tr></table>"
+  htmlString += "<div class='times' id='a9'></div><table><tr><th class='events' id='a99'></th><th class='locations' id='a999'></th></tr></table>"
+  htmlString += "<div class='times' id='a10'></div><table><tr><th class='events' id='a1010'></th><th class='locations' id='a101010'></th></tr></table>"
+	//endcontent
+
   htmlString += "</tr></div>"
   $display.innerHTML = htmlString;
 	agdDirectory[KEY_1] = mainPage.init.bind(mainPage);
 	var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
-	downloadInfo(calendarURL,dayta.getDate(),dayta.getMonth()+1,dayta.getFullYear());
+	updateAgenda(calendarURL);
 }
 
-
-function downloadInfo(calendarURL,dd,mm,yyyy){
+function updateAgenda(calendarURL){
 	fetch(calendarURL)
 	.then(res => res.text())
 	.then(jsonText => JSON.parse(jsonText))
 	.then(function(json) {
-	var htmlString = [];
-	var events = []
-		for (var i in json.items) { //apparently (var i in json.items) does not return the item, but rather the index
-			var event = {
-				title: json.items[i].summary, //hence the need for json.items[i]
-				description: json.items[i].description,
-				location: json.items[i].location,
-	      date: new Date(json.items[i].start.dateTime).toDateString(),
-	      datetwo: new Date(json.items[i].start.dateTime).getDate(),
-				startTime: new Date(json.items[i].start.dateTime).toLocaleTimeString(),
-				endTime: new Date(json.items[i].end.dateTime).toLocaleTimeString()
-			};
-	    events.push(event)
-			//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
-			//this way we can call event.<property> instead?
+		var htmlString = [];
+		var events = []
+			for (var i in json.items) { //apparently (var i in json.items) does not return the item, but rather the index
+				var event = {
+					title: json.items[i].summary, //hence the need for json.items[i]
+					description: json.items[i].description,
+					location: json.items[i].location,
+		      date: new Date(json.items[i].start.dateTime).toDateString(),
+		      datetwo: new Date(json.items[i].start.dateTime).getDate(),
+					startTime: new Date(json.items[i].start.dateTime).toLocaleTimeString(),
+					endTime: new Date(json.items[i].end.dateTime).toLocaleTimeString()
+				};
+		    events.push(event)
+				//extracted all the information into an 'event' item first, for no reason whatsoever, just seemed like a good idea
+				//this way we can call event.<property> instead?
+			}
+		var eventsList = {};
+		for (var i in events) {
+			var eventDay = events[i]['datetwo']+'.'+Date.parse(events[i]['date']).toString('M')+'.'+Date.parse(events[i]['date']).toString('yyyy');
+			eventsList[eventDay] = [];
 		}
-		console.log(events);
-	//CHECK IF CURRENT MONTH HAS ANY EVENTS
-	/*for (var i=0;i<events.length;i++){
-		console.log(events[i].date);
-	}
-	for (var i=0;i<events.length;i++)
-		if (Date.parse(events[i].date).toString('M') == mm && Date.parse(events[i].date).toString('yyyy') == yyyy) {
-			var parsedDate = Date.parse(events[i].date).toString('M')+'/'+Date.parse(events[i].date).toString('d')+'/'+Date.parse(events[i].date).toString('yyyy')
-			console.log(parsedDate);
-			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += "<div class = timeSlot><div class = word>" + localeTimeStringConverter(events[i].startTime) + " to " + localeTimeStringConverter(events[i].endTime) + "</div></div>"
-			document.getElementById('calendar1').contentWindow.document.getElementById(parsedDate).innerHTML += "<div class = titleSlot><div class = word>" + events[i].title + "</div></div>";
-	}
-	  //getDate gives DD*/
-	})};
+		for (var i in events) {
+			var eventDay = events[i]['datetwo']+'.'+Date.parse(events[i]['date']).toString('M')+'.'+Date.parse(events[i]['date']).toString('yyyy');
+			tempy = {
+				'Title' : events[i]['title'],
+				'Venue' : events[i]['location'],
+				'Start' : events[i]['startTime'],
+				'End' : events[i]['endTime']
+			}
+			eventsList[eventDay].push(tempy);
+		}
+		console.log(eventsList);
+		var toDate = new Date();
+		for (var i in eventsList){
+			console.log(i);
+			console.log(eventsList[i]);
+			console.log(toDate.toString('d'+'.'+'M'+'.'+'yyyy'))
+			if(i == toDate.toString('d'+'.'+'M'+'.'+'yyyy')){
+				for (var j = 1; j < eventsList[i].length;j++){
+          console.log(eventsList[i][j]['Start'].toString('h'));
+					document.getElementById('a'+String(j)).innerHTML = eventsList[i][j]['Start'] + ' To ' + eventsList[i][j]['End'];
+					document.getElementById('a'+String(j)+String(j)).innerHTML = eventsList[i][j]['Title'];
+          document.getElementById('a'+String(j)+String(j)+String(j)).innerHTML = eventsList[i][j]['Venue'];
+				}
+			}
+		}
+	})
+}
