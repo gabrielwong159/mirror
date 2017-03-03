@@ -4,14 +4,14 @@
 const mainSidebar = {
 	left: {
 		1: '',
-		2: 'News',
-		3: 'Calendar',
+		2: '/img/icons/news.png',
+		3: '/img/icons/calendar.png',
 		4: ''
 	},
 
 	right: {
-		1: 'Bus',
-		2: 'Directions',
+		1: '/img/icons/bus.png',
+		2: '/img/icons/location.png',
 		3: '',
 		4: ''
 	}
@@ -19,14 +19,14 @@ const mainSidebar = {
 
 const newsSidebar = {
 	left: {
-		1: 'Back',
+		1: '/img/icons/back.png',
 		2: '',
 		3: '',
 		4: ''
 	},
 
 	right: {
-		1: 'More',
+		1: '/img/icons/more.png',
 		2: '',
 		3: '',
 		4: ''
@@ -46,8 +46,8 @@ function loadSidebar(pageType) {
 	else if (pageType == "news") sidebar = newsSidebar;
 
 	for (var i=1; i<=4; i++) {
-		leftHtml+= "<p>" + sidebar.left[i] + "</p>";
-		rightHtml+= "<p>" + sidebar.right[i] + "</p>";
+		leftHtml+= "<img style='height:50px; width:50px' src='" + (sidebar.left[i] ? sidebar.left[i] : '/img/icons/blank.png') + "'>";
+		rightHtml+= "<img style='height:50px; width:50px' src='" + (sidebar.right[i] ? sidebar.right[i] : '/img/icons/blank.png') + "'>";
 	}
 
 	$leftSidebar.innerHTML = leftHtml;

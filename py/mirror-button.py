@@ -10,7 +10,7 @@ KEYS = [uinput.KEY_1, uinput.KEY_2, uinput.KEY_3, uinput.KEY_4, uinput.KEY_5, ui
 device = uinput.Device(KEYS)
 
 # green, green, yellow, blue, red, pink, black, white
-BUTTONS = [6, 13, 20, 19, 12, 16, 21, 5]
+BUTTONS = [6, 13, 20, 19, 12, 16, 21, 5][::-1] # because the mirror is U P S I D E D O W N
 
 prev = [False, False, False, False, False, False, False, False]
 curr = [False, False, False, False, False, False, False, False]
