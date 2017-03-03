@@ -19,13 +19,18 @@ function printIDC() {
   display.innerHTML += img;
 }
 
-function printAudi() {
+function printAHLT() {
   var htmlString = "<p class = 'mapsheader'> Albert Hong Lecture Theater <br /> Building 1, Level 1 </p>";
   var img = "<img src = '/img/AHLT.png' class = 'maps'>";
   display.innerHTML = htmlString;
   display.innerHTML += img;
 }
-
+function printAudi() {
+  var htmlString = "<p class = 'mapsheader'> SUTD Auditorium <br /> Building 2, Levels 1-2 </p>";
+  var img = "<img src = '/img/audi.png' class = 'maps'>";
+  display.innerHTML = htmlString;
+  display.innerHTML += img;
+}
 function printFabLab() {
   var htmlString = "<p class = 'mapsheader'> SUTD Fabrication Lab. <br /> Building 5, Levels 1-2 </p>";
   var img = "<img src = '/img/fablab.png' class = 'maps'>";
@@ -51,11 +56,12 @@ function loadDirectory() {
   var img = "<img src = '/img/school.png' class = 'maps'>";
   $display.innerHTML = htmlString;
   display.innerHTML += img;
-	dirDirectory[KEY_1] = mainPage.init.bind(mainPage);
+	dirDirectory[KEY_1] = loadDirectory;
   dirDirectory[KEY_2] = loadDirectory;
   dirDirectory[KEY_3] = printCanteen;
   dirDirectory[KEY_4] = printAudi;
-  dirDirectory[KEY_5] = printFabLab;
-  dirDirectory[KEY_6] = printIDC;
+  dirDirectory[KEY_5] = printAHLT;
+  dirDirectory[KEY_6] = printFabLab;
+  dirDirectory[KEY_7] = mainPage.init.bind(mainPage);
 
 }
