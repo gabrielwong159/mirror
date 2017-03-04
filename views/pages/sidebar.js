@@ -80,8 +80,8 @@ function loadSidebar(pageType) {
 	else sidebar = clearSidebar;
 
 	for (var i=1; i<=4; i++) {
-		leftHtml+= "<img style='height:50px; width:50px' src='" + (sidebar.left[i] ? sidebar.left[i] : '/img/icons/blank.png') + "'>";
-		rightHtml+= "<img style='height:50px; width:50px' src='" + (sidebar.right[i] ? sidebar.right[i] : '/img/icons/blank.png') + "'>";
+		leftHtml+= "<img class='sidebarIcon' src='" + (sidebar.left[i] ? sidebar.left[i] : '/img/icons/blank.png') + "'>";
+		rightHtml+= "<img class='sidebarIcon' src='" + (sidebar.right[i] ? sidebar.right[i] : '/img/icons/blank.png') + "'>";
 	}
 
 	$leftSidebar.innerHTML = leftHtml;
