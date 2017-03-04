@@ -11,6 +11,7 @@ function busInit() {
 
 function busStop() {
 	clearInterval(id);
+	$('.buspaper').height('0%');
 }
 
 function loadBus() {

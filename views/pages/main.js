@@ -39,3 +39,4 @@ function loadMain() {
 mainPage.init();
 
 defaultDirectory[KEY_1] = mainPage.init.bind(mainPage);
+defaultDirectory[KEY_2] = busPage.init.bind(busPage);

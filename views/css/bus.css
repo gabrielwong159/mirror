@@ -67,6 +67,7 @@ img.buspaper {
 #simeiContainer {
   left: 16%;
   width:70px;
+  height:inherit;
 }
 #tanahContainer {
   left: 48%;
