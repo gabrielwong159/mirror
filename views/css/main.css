@@ -119,6 +119,8 @@ body {
 	width: 100px;
 	height: 80%;
 	float: left;
+
+  font-size: 50px;
 }
 
 #display {
