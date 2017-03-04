@@ -37,6 +37,9 @@ function loadBus() {
 	outputString+= "<p class='locationContainer' id='simeiContainer'>" + Math.max(parseInt(data.services[0].next.duration_ms/60000), 0) + "</p>";
 	outputString+= "<p class='locationContainer' id='tanahContainer'>" + Math.max(parseInt(data.services[1].next.duration_ms/60000), 0) + "</p>";
 	outputString+= "<p class='locationContainer' id='simpangContainer'>" + Math.max(parseInt(data.services[2].next.duration_ms/60000), 0) + "</p>";
+	outputString+= "<p class='location2Container' id='jurongContainer'>" + '23:16' + "</p>";
+	outputString+= "<p class='location2Container' id='pasirContainer'>" + '00:11' + "</p>";
+	outputString+= "<p class='location2Container' id='airportContainer'>" + '23:23' + "</p>";
 
 	outputString+= "</div>";
 

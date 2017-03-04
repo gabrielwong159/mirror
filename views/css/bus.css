@@ -28,33 +28,36 @@ img.buspaper {
   height: 100%;
   display: flex;
   vertical-align: top;
-  justify-content: center;
 }
 
 #bus2container {
   width: 33%;
   height: 69.5%;
-  margin-top: 30.5%;
+  margin-top: 31.5%;
   margin-left: 2%;
   text-align: center;
+  position:absolute;
 }
 #bus24container {
-  width: 33%;
-  height: 69.5%;
-  margin-top: 30.5%;
+  width: 30%;
+  height: 10%;
+  margin-top: 31.5%;
   text-align: center;
+  position: absolute;
+  margin-left:34%;
 }
 #bus5container {
-  width: 33%;
-  height: 69.5%;
-  margin-top: 30.5%;
+  width: 30%;
+  height: 10%;
+  margin-top: 31.5%;
   text-align: center;
+  position: absolute;
+  margin-left: 66.6%;
 }
 
 .locationContainer {
   position: absolute;
   top: 1125px;
-
   font-size: 50px;
 }
 #simeiContainer {
@@ -64,5 +67,19 @@ img.buspaper {
   left: 735px;
 }
 #simpangContainer {
-  left: 1190px;
+  left: 78%;
+}
+.location2Container {
+  position: absolute;
+  top: 76.4%;
+  font-size: 50px;
+}
+#pasirContainer {
+  left: 53%;
+}
+#jurongContainer {
+  left: 21%;
+}
+#airportContainer {
+  left: 80%;
 }
