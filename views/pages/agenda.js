@@ -9,6 +9,7 @@ function agdInit() {
 }
 
 function loadAgenda() {
+	document.getElementById("display").style="height:2000px";
   var dayta = new Date();
 	var agdDate = dayta.getDate() + ' ' + dayta.getMonthName()+ ' ' + dayta.getFullYear();
   var htmlString = "<div id = agdHeader> Agenda <br />"+ agdDate + "</div>";

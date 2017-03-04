@@ -14,7 +14,7 @@ th.time {
 }
 
 table {
-  width:100%;
+  width:1299px;
 }
 div.times {
   width:100%;
@@ -33,19 +33,21 @@ th.event {
 }
 
 th.events {
-  width: 50%;
+  width: 70%;
   font-size: 60;
   text-align: left;
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
+  padding-left:100px;
 }
 
 th.locations {
-  width: 50%;
+  width: 30%;
   font-size: 60;
   text-align: right;
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
+  padding-right:100px;
 }
 
 #agTable {
