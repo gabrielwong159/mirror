@@ -2,7 +2,7 @@
 //this hides everything in the html so we can have bus overlay
 function hideBox(elementID)
 {
-  document.getElementById(elementID).style = "visibility: hidden; transition: visibility 0.8s linear, opacity 0.8s linear; height:0%; overflow:hidden; opacity: 0;";
+  document.getElementById(elementID).style = "visibility: hidden; transition: visibility 0.8s linear, opacity 0.8s linear; height:0; overflow:hidden; opacity: 0;";
 }
 //this shows everything in the html so we can have bus overlay
 function showBox(elementID)
@@ -28,12 +28,12 @@ function mainInit() {
 
 function loadMain() {
 	$display.innerHTML = "<img src='/img/idcwelcome.png'>";
-	showBox("info");
+  hideBox("busdiv");
+  hideBox("caldiv");
+  hideBox("agddiv");
+  showBox("info");
 	showBox("main");
 	showBox("motd");
-	hideBox("busdiv");
- 	hideBox("caldiv");
-  hideBox("agddiv");
 }
 
 mainPage.init();
