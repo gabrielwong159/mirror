@@ -23,7 +23,7 @@ function newsPageLoading() {
 }
 
 function newsKeyEvent(event) {
-	if (event.which == KEY_2 && currentPage == "news") {
+	if (event.which == KEY_2 && currentPage == newsPage) {
 		newsPageLoading();
 		newsItemPage = (newsItemPage+1)%2;
 
