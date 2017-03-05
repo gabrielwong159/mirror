@@ -12,7 +12,7 @@ const mainSidebar = {
 	right: {
 		1: '/img/icons/bus.png',
 		2: '/img/icons/location.png',
-		3: '',
+		3: '/img/icons/agenda.png',
 		4: ''
 	}
 };
