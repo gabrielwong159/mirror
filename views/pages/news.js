@@ -11,10 +11,12 @@ var newsItemPage = 0;
 function newsInit() {
 	loadNews();
 	loadSidebar("news");
+	defaultDirectory[KEY_2] = null;
 	document.addEventListener("keydown", newsKeyEvent);
 }
 
 function newsStop() {
+	defaultDirectory[KEY_2] = busPage.init.bind(busPage);
 	document.removeEventListener("keydown", newsKeyEvent);
 }
 
