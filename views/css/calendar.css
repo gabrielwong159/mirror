@@ -65,6 +65,7 @@ header {
 #calendar .days li {
     height: 14%;
     background: transparent;
+    overflow:hidden;
 }
 
 #calendar .days li:hover {
