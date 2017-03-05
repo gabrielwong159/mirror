@@ -6,14 +6,14 @@ function updateWeather() {
 		//woeid: '1062406',
 		woeid: '24703080',
 		unit: 'c',
-		
+
 		success: function(weather) {
 			var skycons = new Skycons({"color": "white"});
 
 			var htmlString = '<canvas id="weather-icon" width="128" height="128"></canvas><h2>'+weather.temp+'&deg;'+weather.units.temp+'</h2>';
 			htmlString+= '<div id="region">SUTD, '+weather.city+'</div>';
-			htmlString+= '<div>'+weather.currently/*+ ' Weather | Sunset ' +weather.sunset*/+ '</div>';
-			htmlString+= '<div>Humidity ' +weather.humidity+ '%\</div>';
+			htmlString+= '<div id="weatherr">'+weather.currently/*+ ' Weather | Sunset ' +weather.sunset*/+ '</div>';
+			htmlString+= '<div id="humidity">Humidity ' +weather.humidity+ '%\</div>';
 			document.getElementById("weather").innerHTML = htmlString;
 
 			skycons.remove("weather-icon")
@@ -26,7 +26,7 @@ function updateWeather() {
 		}
 	});
 };
-        
+
 $(document).ready(function() {
 	updateWeather();
 	setInterval(updateWeather, 300000);

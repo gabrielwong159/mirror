@@ -49,8 +49,17 @@ body {
 
 #weather {
   width: 350px;
+  height:auto;
   float:right;
   text-align: right;
+}
+
+#weatherr{
+  height:auto;
+}
+
+#humidity{
+  height:auto;
 }
 
 i {
@@ -74,7 +83,7 @@ i {
 }
 
 #weather div {
-  height: 20px;
+  height: auto;
   /* margin-right: 30px; //correlated to padding-right on h2 */
   font-family: 'Open Sans', sans-serif;
   font-size: 3em;
@@ -83,7 +92,7 @@ i {
 }
 
 #region {
- font-size: 5em; 
+ font-size: 5em;
 }
 
 #motd {
@@ -91,5 +100,5 @@ i {
     text-align: center;
     font-size: 3em;
     bottom: 0;
-    width: 100%; 
+    width: 100%;
 }
