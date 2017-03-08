@@ -11,13 +11,7 @@ function showBox(elementID)
 }
 //end of this
 
-const mainDirectory = {
-	[KEY_2]: busPage.init.bind(busPage),
-	[KEY_3]: newsPage.init.bind(newsPage),
-	[KEY_4]: dirPage.init.bind(dirPage),
-	[KEY_5]: calPage.init.bind(calPage),
-  [KEY_6]: agendaPage.init.bind(agendaPage)
-};
+var mainDirectory = {};
 
 var mainPage = new Page("main", mainInit, null, mainDirectory);
 
@@ -28,15 +22,15 @@ function mainInit() {
 
 function loadMain() {
 	$display.innerHTML = "<img src='/img/idcwelcome.png'>";
-  hideBox("busdiv");
-  hideBox("caldiv");
-  hideBox("agddiv");
-  showBox("info");
+	hideBox("busdiv");
+	hideBox("caldiv");
+	hideBox("agddiv");
+	showBox("info");
 	showBox("main");
 	showBox("motd");
 }
 
 mainPage.init();
 
-defaultDirectory[KEY_1] = mainPage.init.bind(mainPage);
-defaultDirectory[KEY_2] = busPage.init.bind(busPage);
+//deprecated
+//defaultDirectory[KEY_1] = mainPage.init.bind(mainPage);

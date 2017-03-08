@@ -1,5 +1,6 @@
 // news page - function 3
-var newsPage = new Page("news", newsInit, newsStop);
+var newsDirectory = {};
+var newsPage = new Page("news", newsInit, newsStop, newsDirectory);
 
 const URL = 'http://www.channelnewsasia.com/starterkit/servlet/cna/rss/home.xml';
 //const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
@@ -11,12 +12,10 @@ var newsItemPage = 0;
 function newsInit() {
 	loadNews();
 	loadSidebar("news");
-	defaultDirectory[KEY_2] = null;
 	document.addEventListener("keydown", newsKeyEvent);
 }
 
 function newsStop() {
-	defaultDirectory[KEY_2] = busPage.init.bind(busPage);
 	document.removeEventListener("keydown", newsKeyEvent);
 }
 

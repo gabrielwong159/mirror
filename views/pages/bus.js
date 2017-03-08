@@ -1,6 +1,6 @@
 // bus page - function 2
-
-var busPage = new Page("bus", busInit, busStop);
+var busDirectory = {};
+var busPage = new Page("bus", busInit, busStop, busDirectory);
 
 var id;
 
