@@ -23,7 +23,7 @@ function loadBus() {
 	var jsonString = retrieve(96049);
 	var data = JSON.parse(jsonString);
 
-	var wallpaper = "<img src= '/img/buswallpaper.png' class='buspaper'>";
+	var wallpaper = "<img src= '/img/buswallpaper.png' class='buspaper' id = 'buspaperr'>";
 
 	var outputString = "";
 	outputString+= "<div class='bus'>";

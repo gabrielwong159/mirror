@@ -26,9 +26,9 @@ body {
 }
 
 #info {
-    width: 100%;
+    width: 97vw;
     margin: auto;
-    height:320px;
+    height:15vw;
     padding: 0px;
     font-weight: bold;
 }
@@ -38,17 +38,19 @@ body {
 }
 
 #date p:first-child {
-    font-size: 4em;
+    font-size: 4vw;
+    margin-top: 0;
     margin-bottom: 0;
 }
 
 #time {
-    font-size: 10em;
+    font-size: 8vw;
     margin-top: 0;
+    margin-bottom:0;
 }
 
 #weather {
-  width: 350px;
+  width: 15vw;
   height:auto;
   float:right;
   text-align: right;
@@ -72,10 +74,10 @@ i {
 }
 
 #weather h2 {
-  margin-top: 20px;
-  margin-bottom: 14px;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
   color: #F8F8FF;
-  font-size: 6em;
+  font-size: 2.5vw;
   font-weight: bold;
   text-align: right;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
@@ -86,7 +88,7 @@ i {
   height: auto;
   /* margin-right: 30px; //correlated to padding-right on h2 */
   font-family: 'Open Sans', sans-serif;
-  font-size: 3em;
+  font-size: 1.5vw;
   margin-bottom: 10px;
 }
 

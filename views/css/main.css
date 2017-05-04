@@ -14,12 +14,12 @@ html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
-    height:2720px;
-    width:1515px;
+    height:100vw;
+    width:100vw;
 }
 
 body {
-  height: 2720px;
+  height: 100%;
 }
 /*
  * Remove text-shadow in selection highlight:
@@ -65,7 +65,7 @@ svg,
 video {
     vertical-align: middle;
     display:block;
-    margin-top: 50%;
+    margin-top: 20vw;
     margin-left: auto;
     margin-right: auto;
 }
@@ -114,27 +114,34 @@ body {
 }
 
 #main {
-	width: 100%;
-	height: 1270px;
+	width: 100vw;
+	height: 100vw;
 }
 
 .sidebar {
-	width: 100px;
-	height: 80%;
+	width: 2.5vw;
+	height: 80vw;
 	float: left;
 
   font-size: 50px;
 }
-
+#rightsidebar {
+  margin-right:0;
+}
+#leftsidebar {
+  margin-left:0;
+}
+#idcwelcome {
+  width:60vw;
+}
 .sidebarIcon {
-  width: 50px;
-  height: 50px;
-
+  width: 3vw;
+  height: 3vw;
   margin-top: 275px;
 }
 
 #display {
-	width: calc(100% - 200px);
+	width: 93vw;
 	height: auto;
 	float: left;
     display: block;
@@ -155,18 +162,19 @@ canvas {
     float: left;
     margin-left: 8px;
     margin-top: 8px;
+    width:6vw;
+    height:6vw;
 }
 
 p.mapsheader {
   font-size: 50px;
   text-align: center;
-  margin-top: 20%;
+  margin-top: 10%;
 }
 
 img.maps {
-  max-width: 1240px;
-  position: absolute;
-  margin-top: 3%;
+  width:85vw;
+  margin-top: 5vw;
 }
 
 iframe.calendar {
