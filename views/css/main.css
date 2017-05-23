@@ -118,6 +118,10 @@ body {
 	height: 100vw;
 }
 
+#motd {
+  margin-top:10vw;
+}
+
 .sidebar {
 	width: 2.5vw;
 	height: 80vw;
