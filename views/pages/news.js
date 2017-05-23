@@ -2,7 +2,7 @@
 var newsDirectory = {};
 var newsPage = new Page("news", newsInit, newsStop, newsDirectory);
 
-const URL = 'http://www.channelnewsasia.com/starterkit/servlet/cna/rss/home.xml';
+const URL = 'http://www.channelnewsasia.com/rssfeeds/8395986';
 //const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
 
 var newsJson = null;
