@@ -80,6 +80,7 @@ iframe {
     vertical-align: middle;
     display:block;
     border-width:0;
+    height:100%;
 }
 /*
  * Remove default fieldset styles.
