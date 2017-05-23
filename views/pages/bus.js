@@ -11,7 +11,7 @@ function busInit() {
 
 function busStop() {
 	clearInterval(id);
-	$('.buspaper').height('0%');
+	//$('.buspaper').height('100%');
 }
 
 function loadBus() {
@@ -22,9 +22,7 @@ function loadBus() {
 
 	var jsonString = retrieve(96049);
 	var data = JSON.parse(jsonString);
-
 	var wallpaper = "<img src= '/img/buswallpaper.png' class='buspaper' id = 'buspaperr'>";
-
 	var outputString = "";
 	outputString+= "<div class='bus'>";
 	for (var bus in data.services) {
