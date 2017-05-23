@@ -22,9 +22,9 @@ function loadBus() {
 
 	var jsonString = retrieve(96049);
 	var data = JSON.parse(jsonString);
-	var wallpaper = "<img src= '/img/buswallpaper.png' class='buspaper' id = 'buspaperr'>";
+	var wallpaper = "<img src= '/img/buswallpaper.png' class='buspaper' id = 'buspaperr' style= 'left: 0px;'>";
 	var outputString = "";
-	outputString+= "<div class='bus'>";
+	outputString+= "<div class='bus' style='left:0px;'>";
 	for (var bus in data.services) {
 		nextBus = parseInt(data.services[bus].next.duration_ms/60000);
 

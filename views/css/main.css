@@ -15,7 +15,7 @@ html {
     font-size: 1em;
     line-height: 1.4;
     height:100vw;
-    width:100vw;
+    width:97vw;
 }
 
 body {
@@ -114,7 +114,7 @@ body {
 }
 
 #main {
-	width: 100vw;
+	width: 98vw;
 	height: 100vw;
 }
 
