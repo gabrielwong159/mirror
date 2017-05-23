@@ -18,6 +18,12 @@ html {
     width:97vw;
 }
 
+::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+        background-color: #000;
+}
+
 body {
   height: 100%;
 }
