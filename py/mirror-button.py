@@ -1,5 +1,6 @@
 import time
 import uinput
+import os
 
 try:
     import RPi.GPIO as GPIO
@@ -26,6 +27,8 @@ def buttonPressed():
                 curr[i] = True
                 if prev[i] == False:
                     device.emit_click(KEYS[i])
+                    if BUTTONS[i] == 13:
+                        os.system('reboot')
             else:
                 curr[i] = False
 
@@ -37,4 +40,3 @@ while True:
 	except KeyboardInterrupt:
             print "\nexiting"
             GPIO.cleanup()
-
