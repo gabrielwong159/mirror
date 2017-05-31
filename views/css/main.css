@@ -148,11 +148,11 @@ body {
 .sidebarIcon {
   width: 3vw;
   height: 3vw;
-  margin-top: 275px;
+  margin-top: 15vw;
 }
 
 #display {
-	width: 93vw;
+	width: 92.5vw;
 	height: auto;
 	float: left;
     display: block;
