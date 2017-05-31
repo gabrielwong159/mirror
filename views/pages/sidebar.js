@@ -6,7 +6,7 @@ const mainSidebar = {
 		1: '/img/icons/home.png',
 		2: '/img/icons/news.png',
 		3: '/img/icons/calendar.png',
-		4: ''
+		4: '/img/icons/shutdown.png'
 	},
 
 	right: {
