@@ -45,7 +45,7 @@ function loadNews() {
 		fetchNews(newsJson, "<div id='newsDisplay'>", 8, 12); // 8-18 for all 10 entries
 	})
 	.catch((err) => {
-		$display.innerHTML = "<div id='error'>Yesss: ${err}</div>";
+		$display.innerHTML = `<div id='error'>Yesss: ${err}</div>`;
 	});
 }
 
