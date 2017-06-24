@@ -2,8 +2,9 @@
 var newsDirectory = {};
 var newsPage = new Page("news", newsInit, newsStop, newsDirectory);
 
-const URL = 'http://www.channelnewsasia.com/rssfeeds/8395986';
+//const URL = 'http://www.channelnewsasia.com/rssfeeds/8395986';
 //const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
+const URL = "http://smart-mirror-news.azurewebsites.net/CNA";
 
 var newsJson = null;
 
@@ -23,13 +24,31 @@ function newsPageLoading() {
 	$display.innerHTML = "<img src='/img/newsLoading.gif' width=800px height=800px>";
 }
 
+function generateNewsHTML(jsonObj, start, end) {
+	var htmlString = "<div id='newsDisplay`>";
+
+	for (var i=start; i<end; i++) {
+		var obj = jsonObj[i];
+		var orientation = i%2 ? "left" : "right";
+
+		htmlString+= "<div class='newsItemContainer'>";
+		htmlString+= `<img class="newsPic ${orientation}" src="${obj.thumbnail}">`;
+		htmlString+= `<div class="newsText"><a href="${obj.link}"><p id="newsTitle">${obj.title}</p></a><p id="newsDescription">${obj.description}</p><br></div>`;
+		htmlString+= "</div>";
+	}
+
+	htmlString+= "</div>";
+
+	return htmlString;
+}
+
 function newsKeyEvent(event) {
 	if (event.which == KEY_2 && currentPage == newsPage) {
 		newsPageLoading();
 		newsItemPage = (newsItemPage+1)%2;
 
-		if (newsItemPage == 0) fetchNews(newsJson, "<div id='newsDisplay'>", 8, 12);
-		else fetchNews(newsJson, "<div id='newsDisplay'>", 12, 16);
+		if (newsItemPage == 0) $display.innerHTML = generateNewsHTML(newsJson, 0, 4);
+		else $display.innerHTML = generateNewsHTML(newsJson, 4, 8);
 	}
 }
 
@@ -38,75 +57,12 @@ function loadNews() {
 
 	fetch(URL)
 	.then(res => res.text())
-	.then(xmlText => xml2json(parseXml(xmlText), "  "))
 	.then(jsonString => JSON.parse(jsonString))
 	.then(function(jsonObj) {
 		newsJson = jsonObj;
-		fetchNews(newsJson, "<div id='newsDisplay'>", 8, 12); // 8-18 for all 10 entries
+		$display.innerHTML = generateNewsHTML(newsJson, 0, 4);
 	})
-	.catch((err) => {
-		$display.innerHTML = `<div id='error'>Yesss: ${err}</div>`;
+	.catch(err => {
+		$display.innerHTML = `<div id='error'>${err}</div>`;
 	});
-}
-
-function fetchNews(jsonObj, htmlString, counter, last) {
-	if (counter == last) {
-		htmlString+= "</div>";
-		$display.innerHTML = htmlString;
-
-		return null;
-	}
-
-	var item = jsonObj.rss.channel[counter].item;
-	var title = item.title;
-	var description = item.description;
-	var url = item.link;
-
-	fetch(item.link)
-	.then(res => res.text())
-	.then(function (htmlText) {
-		imageUrl = '';
-
-		var index = htmlText.search('.jpg');
-		if (index>=0) {
-			var htmlSubstring = htmlText.substring(index+4);
-			var frontIndex = htmlText.search('<meta property="og:image" content="');
-
-			if (frontIndex>=0) {
-				var endIndex = htmlText.search('.jpg');
-				imageUrl = htmlText.substring(frontIndex+35, endIndex+4);
-			}
-		}
-
-		htmlString+= "<div class='newsItemContainer'>";
-		htmlString+= '<img class="newsPic ' + (counter%2 ? 'left':'right') + '" src="' + imageUrl + '">';
-		htmlString+= "<div class='newsText'><a href='" + url + "'><p id='newsTitle'>" + title + "</p></a><p id='newsDescription'>" + description + "</p><br></div>";
-		htmlString+= "</div>";
-	})
-	.then(function() {
-		return htmlString+= fetchNews(jsonObj, htmlString, counter+1, last);
-	});
-
-}
-
-function parseXml(xml) {
-   var dom = null;
-   if (window.DOMParser) {
-      try {
-         dom = (new DOMParser()).parseFromString(xml, "text/xml");
-      }
-      catch (e) { dom = null; }
-   }
-   else if (window.ActiveXObject) {
-      try {
-         dom = new ActiveXObject('Microsoft.XMLDOM');
-         dom.async = false;
-         if (!dom.loadXML(xml)) // parse error ..
-            window.alert(dom.parseError.reason + dom.parseError.srcText);
-      }
-      catch (e) { dom = null; }
-   }
-   else
-      alert("oops");
-   return dom;
 }

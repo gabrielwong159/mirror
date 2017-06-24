@@ -3,7 +3,8 @@ var xml2json = require("simple-xml2json");
 
 const URLS = {
 	"cna": "http://www.channelnewsasia.com/rssfeeds/8395986",
-	"sutd": "http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed"
+	"sutd": "http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed",
+	"bbc": "http://feeds.bbci.co.uk/news/rss.xml"
 }
 
 const PORT = process.env.port || 5000;
@@ -14,25 +15,52 @@ var cors = require("cors");
 var app = express();
 app.use(cors());
 
-app.get("/cna", function(req, res) {
-	fetchUrl(URLS["cna"], function (error, meta, body) {
-		var jsonObj = xml2json.parser(body.toString());
-		var newsItems = jsonObj.rss.channel;
+app.get("/:site", function(req, res) {
+	var site = req.params.site.toLowerCase();
 
-		var newsResult = [];
-		for (var i=0; i<newsItems.totalresults; i++) {
-			var item = newsItems.item[i];
-			newsResult.push({
+	fetchUrl(URLS[site], function(error, meta, body) {
+		var jsonObj = xml2json.parser(body.toString());
+		var result = getNews(site, jsonObj);
+		console.log(JSON.stringify(result, null, 4));
+		res.send(result);
+
+	});
+});
+
+function getNews(site, jsonObj) {
+	var newsItems = jsonObj.rss.channel;
+	var newsCount = newsItems.item.length;
+
+	var res = [];
+	for (var i=0; i<newsCount; i++) {
+		var item = newsItems.item[i];
+
+		if (site == "cna") {
+			res.push({
 				"title": item.title,
 				"link": item.link,
 				"description": item.description,
 				"thumbnail": item.thumbnail
 			});
 		}
+		else if (site == "sutd") {
+			res.push({
+				"title": item.title,
+				"link": item.link
+			});
+		}
+		else if (site == "bbc") {
+			res.push({
+				"title": item.title,
+				"link": item.link,
+				"description": item.description,
+				"thumbnail": item['media%3athumbnail'].url
+			});
+		}
+	}
 
-		res.send(newsResult);
-	});
-});
+	return res;
+}
 
 app.listen(PORT, err => {
 	if (err) throw err;
