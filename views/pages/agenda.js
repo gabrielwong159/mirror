@@ -1,34 +1,31 @@
-var agdDirectory = {
-
-};
-
-var agendaPage = new Page("agenda", agdInit, null, agdDirectory);
+var agendaPage = new Page("agenda", agdInit, null);
 
 function agdInit() {
+	agendaPage.directory[KEY_1] = mainPage.init.bind(mainPage);
+
 	loadAgenda();
 }
 
 function loadAgenda() {
 	document.getElementById("display").style="height:2000px";
-  var dayta = new Date();
+ 	var dayta = new Date();
 	var agdDate = dayta.getDate() + ' ' + dayta.getMonthName()+ ' ' + dayta.getFullYear();
-  var htmlString = "<div id = agdHeader> Agenda <br />"+ agdDate + "</div>";
-  //content
-  htmlString += "<div class='times' id='a1'></div><table><tr><th class='events' id='a11'></th><th class='locations' id='a111'></th></tr></table>"
-  htmlString += "<div class='times' id='a2'></div><table><tr><th class='events' id='a22'></th><th class='locations' id='a222'></th></tr></table>"
-  htmlString += "<div class='times' id='a3'></div><table><tr><th class='events' id='a33'></th><th class='locations' id='a333'></th></tr></table>"
-  htmlString += "<div class='times' id='a4'></div><table><tr><th class='events' id='a44'></th><th class='locations' id='a444'></th></tr></table>"
-  htmlString += "<div class='times' id='a5'></div><table><tr><th class='events' id='a55'></th><th class='locations' id='a555'></th></tr></table>"
-  htmlString += "<div class='times' id='a6'></div><table><tr><th class='events' id='a66'></th><th class='locations' id='a666'></th></tr></table>"
-  htmlString += "<div class='times' id='a7'></div><table><tr><th class='events' id='a77'></th><th class='locations' id='a777'></th></tr></table>"
-  htmlString += "<div class='times' id='a8'></div><table><tr><th class='events' id='a88'></th><th class='locations' id='a888'></th></tr></table>"
-  htmlString += "<div class='times' id='a9'></div><table><tr><th class='events' id='a99'></th><th class='locations' id='a999'></th></tr></table>"
-  htmlString += "<div class='times' id='a10'></div><table><tr><th class='events' id='a1010'></th><th class='locations' id='a101010'></th></tr></table>"
+  	var htmlString = "<div id = agdHeader> Agenda <br />"+ agdDate + "</div>";
+	//content
+	htmlString += "<div class='times' id='a1'></div><table><tr><th class='events' id='a11'></th><th class='locations' id='a111'></th></tr></table>"
+	htmlString += "<div class='times' id='a2'></div><table><tr><th class='events' id='a22'></th><th class='locations' id='a222'></th></tr></table>"
+	htmlString += "<div class='times' id='a3'></div><table><tr><th class='events' id='a33'></th><th class='locations' id='a333'></th></tr></table>"
+	htmlString += "<div class='times' id='a4'></div><table><tr><th class='events' id='a44'></th><th class='locations' id='a444'></th></tr></table>"
+	htmlString += "<div class='times' id='a5'></div><table><tr><th class='events' id='a55'></th><th class='locations' id='a555'></th></tr></table>"
+	htmlString += "<div class='times' id='a6'></div><table><tr><th class='events' id='a66'></th><th class='locations' id='a666'></th></tr></table>"
+	htmlString += "<div class='times' id='a7'></div><table><tr><th class='events' id='a77'></th><th class='locations' id='a777'></th></tr></table>"
+	htmlString += "<div class='times' id='a8'></div><table><tr><th class='events' id='a88'></th><th class='locations' id='a888'></th></tr></table>"
+	htmlString += "<div class='times' id='a9'></div><table><tr><th class='events' id='a99'></th><th class='locations' id='a999'></th></tr></table>"
+	htmlString += "<div class='times' id='a10'></div><table><tr><th class='events' id='a1010'></th><th class='locations' id='a101010'></th></tr></table>"
 	//endcontent
 
-  htmlString += "</tr></div>"
-  $display.innerHTML = htmlString;
-	agdDirectory[KEY_1] = mainPage.init.bind(mainPage);
+	htmlString += "</tr></div>"
+	$display.innerHTML = htmlString;
 	var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
 	updateAgenda(calendarURL);
 }

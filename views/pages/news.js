@@ -1,6 +1,5 @@
 // news page - function 3
-var newsDirectory = {};
-var newsPage = new Page("news", newsInit, newsStop, newsDirectory);
+var newsPage = new Page("news", newsInit, newsStop);
 
 //const URL = 'http://www.channelnewsasia.com/rssfeeds/8395986';
 //const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
@@ -11,6 +10,8 @@ var newsJson = null;
 var newsItemPage = 0;
 
 function newsInit() {
+	newsPage.directory[KEY_1] = mainPage.init.bind(mainPage);
+
 	loadNews();
 	loadSidebar("news");
 	document.addEventListener("keydown", newsKeyEvent);

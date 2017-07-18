@@ -1,10 +1,11 @@
 // bus page - function 2
-var busDirectory = {};
-var busPage = new Page("bus", busInit, busStop, busDirectory);
+var busPage = new Page("bus", busInit, busStop);
 
 var id;
 
 function busInit() {
+	busPage.directory[KEY_1] = mainPage.init.bind(mainPage);
+
 	loadBus();
 	id = setInterval(loadBus, 60000);
 }

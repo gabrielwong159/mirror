@@ -1,9 +1,6 @@
-var dirDirectory = {
-};
+var dirPage = new Page("directions", dirInit, null);
 
-var dirPage = new Page("directions", dirInit, null, dirDirectory);
-
-//printCanteen, idc, etc. have to be BEFORE dirInit->loadDirectory because of dirDirectory
+//printCanteen, idc, etc. have to be BEFORE dirInit->loadDirectory because of dirPage.directory
 function printCanteen() {
   var htmlString = "<p class = 'mapsheader'> SUTD Canteen. 2.201 <br /> Building 2, Level 2 </p>";
   var img = "<img src = '/img/canteen.png' class = 'maps'>";
@@ -47,6 +44,13 @@ function transIn() {
 //end of page-specific functions
 
 function dirInit() {
+  dirPage.directory[KEY_1] = mainPage.init.bind(mainPage);
+  dirPage.directory[KEY_2] = loadDirectory;
+  dirPage.directory[KEY_3] = printCanteen;
+  dirPage.directory[KEY_4] = printAudi;
+  dirPage.directory[KEY_5] = printAHLT;
+  dirPage.directory[KEY_6] = printFabLab;
+
 	loadDirectory();
   loadSidebar("directions");
 }
@@ -56,11 +60,4 @@ function loadDirectory() {
   var img = "<img src = '/img/school.png' class = 'maps'>";
   $display.innerHTML = htmlString;
   display.innerHTML += img;
-	dirDirectory[KEY_1] = mainPage.init.bind(mainPage);
-  dirDirectory[KEY_2] = loadDirectory;
-  dirDirectory[KEY_3] = printCanteen;
-  dirDirectory[KEY_4] = printAudi;
-  dirDirectory[KEY_5] = printAHLT;
-  dirDirectory[KEY_6] = printFabLab;
-
 }

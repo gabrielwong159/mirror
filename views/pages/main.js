@@ -11,11 +11,15 @@ function showBox(elementID)
 }
 //end of this
 
-var mainDirectory = {};
-
-var mainPage = new Page("main", mainInit, null, mainDirectory);
+var mainPage = new Page("main", mainInit, null);
 
 function mainInit() {
+	mainPage.directory[KEY_2] = busPage.init.bind(busPage);
+	mainPage.directory[KEY_3] = newsPage.init.bind(newsPage);
+	mainPage.directory[KEY_4] = dirPage.init.bind(dirPage);
+	mainPage.directory[KEY_5] = calPage.init.bind(calPage);
+	mainPage.directory[KEY_6] = agendaPage.init.bind(agendaPage);
+
 	loadMain();
 	loadSidebar("main");
 }
@@ -28,6 +32,7 @@ function loadMain() {
 	showBox("info");
 	showBox("main");
 	showBox("motd");
+
 }
 
 mainPage.init();
