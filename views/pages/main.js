@@ -1,13 +1,10 @@
-
 //this hides everything in the html so we can have bus overlay
-function hideBox(elementID)
-{
-  document.getElementById(elementID).style = "visibility: hidden; transition: visibility 0.8s linear, opacity 0.8s linear; height:0; overflow:hidden; opacity: 0;";
+function hideBox(elementID) {
+	document.getElementById(elementID).style = "visibility: hidden; transition: visibility 0.8s linear, opacity 0.8s linear; height:0; overflow:hidden; opacity: 0;";
 }
 //this shows everything in the html so we can have bus overlay
-function showBox(elementID)
-{
-  document.getElementById(elementID).style = "visibility: visible; transition:opacity 0.8s linear; height:auto; overflow:hidden; opacity: 1;";
+function showBox(elementID) {
+	document.getElementById(elementID).style = "visibility: visible; transition:opacity 0.8s linear; height:auto; overflow:hidden; opacity: 1;";
 }
 //end of this
 
@@ -19,6 +16,7 @@ function mainInit() {
 	mainPage.directory[KEY_4] = dirPage.init.bind(dirPage);
 	mainPage.directory[KEY_5] = calPage.init.bind(calPage);
 	mainPage.directory[KEY_6] = agendaPage.init.bind(agendaPage);
+	//mainPage.directory[KEY_7] = gamePage.init.bind(gamePage);
 
 	loadMain();
 	loadSidebar("main");
@@ -32,10 +30,4 @@ function loadMain() {
 	showBox("info");
 	showBox("main");
 	showBox("motd");
-
 }
-
-mainPage.init();
-
-//deprecated
-//defaultDirectory[KEY_1] = mainPage.init.bind(mainPage);

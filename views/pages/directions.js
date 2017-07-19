@@ -44,15 +44,15 @@ function transIn() {
 //end of page-specific functions
 
 function dirInit() {
-  dirPage.directory[KEY_1] = mainPage.init.bind(mainPage);
-  dirPage.directory[KEY_2] = loadDirectory;
-  dirPage.directory[KEY_3] = printCanteen;
-  dirPage.directory[KEY_4] = printAudi;
-  dirPage.directory[KEY_5] = printAHLT;
-  dirPage.directory[KEY_6] = printFabLab;
+dirPage.directory[KEY_1] = mainPage.init.bind(mainPage);
+dirPage.directory[KEY_2] = loadDirectory;
+dirPage.directory[KEY_3] = printCanteen;
+dirPage.directory[KEY_4] = printAudi;
+dirPage.directory[KEY_5] = printAHLT;
+dirPage.directory[KEY_6] = printFabLab;
 
-	loadDirectory();
-  loadSidebar("directions");
+loadDirectory();
+loadSidebar("directions");
 }
 
 function loadDirectory() {
