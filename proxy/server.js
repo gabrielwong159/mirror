@@ -17,7 +17,7 @@ app.use(cors());
 
 app.get("/bus", function(req, res) {
 	var url = `http://datamall2.mytransport.sg/ltaodataservice/BusArrival?BusStopID=${req.query.id || 96049}`;
-	var options = { headers: {"AccountKey": process.env.AccountKey} };
+	var options = { headers: {"AccountKey": process.env.ltaKey} };
 	fetchUrl(url, options, function(error, meta, body) {
 		var jsonObj = JSON.parse(body.toString());
 		var now = Date.now();
@@ -37,6 +37,27 @@ app.get("/bus", function(req, res) {
 
 		res.send(result);
 	});
+});
+
+app.get("/maps", function(req, res) {
+	var result = {};
+	var loc = {
+		"sutd": "1.340284,103.962949",
+		"simei": "1.343197,103.953399",
+		"tanah": "1.327179,103.946499",
+		"simpang": "1.331052,103.948366"
+	};
+	function getDuration(origin, destination) {
+		var url = `https://maps.googleapis.com/maps/api/directions/json?origin=${loc[origin]}&destination=${loc[destination]}&mode=transit&transit_mode=bus&key=${process.env.gmapsKey}`;
+		fetchUrl(url, function(error, meta, body) {
+			var jsonObj = JSON.parse(body.toString());
+			result[destination] = parseInt(jsonObj["routes"][0]["legs"][0]["steps"][0]["duration"]["value"]/60);
+			if (result["simei"] && result["tanah"] && result["simpang"]) res.send(result);
+		});
+	}
+	getDuration("sutd", "simei");
+	getDuration("sutd", "tanah");
+	getDuration("sutd", "simpang");
 });
 
 app.get("/:site", function(req, res) {
