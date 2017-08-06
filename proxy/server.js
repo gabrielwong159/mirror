@@ -15,6 +15,30 @@ var cors = require("cors");
 var app = express();
 app.use(cors());
 
+app.get("/bus", function(req, res) {
+	var url = `http://datamall2.mytransport.sg/ltaodataservice/BusArrival?BusStopID=${req.query.id || 96049}`;
+	var options = { headers: {"AccountKey": process.env.AccountKey} };
+	fetchUrl(url, options, function(error, meta, body) {
+		var jsonObj = JSON.parse(body.toString());
+		var now = Date.now();
+		var result = {};
+		for (i in jsonObj.Services) {
+			var service = jsonObj.Services[i];
+			var busNumber = service.ServiceNo;
+			var nextArrival = service.NextBus.EstimatedArrival;
+			var subsequentArrival = service.SubsequentBus3.EstimatedArrival;
+
+			result[busNumber] = {
+				"next": nextArrival ? parseInt((new Date(nextArrival) - now)/60000) : null,
+				"subsequent": subsequentArrival ? parseInt((new Date(subsequentArrival) - now)/60000) : null,
+				"status": service.Status
+			};
+		}
+
+		res.send(result);
+	});
+});
+
 app.get("/:site", function(req, res) {
 	var site = req.params.site.toLowerCase();
 

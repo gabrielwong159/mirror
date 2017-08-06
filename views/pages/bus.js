@@ -54,7 +54,7 @@ function retrieve(busStop) {
 	request.onreadystatechange = function() {
         if (request.readyState==4 && request.status==200) return request.responseText;
 	}
-    request.open("GET", path, false );
+    request.open("GET", path, false);
     request.send();
 
 	return request.responseText;
