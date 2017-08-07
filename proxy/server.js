@@ -1,3 +1,4 @@
+require("dotenv").config();
 var fetchUrl = require("fetch").fetchUrl;
 var xml2json = require("simple-xml2json");
 
