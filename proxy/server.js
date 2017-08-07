@@ -51,7 +51,10 @@ app.get("/maps", function(req, res) {
 		var url = `https://maps.googleapis.com/maps/api/directions/json?origin=${loc[origin]}&destination=${loc[destination]}&mode=transit&transit_mode=bus&key=${process.env.gmapsKey}`;
 		fetchUrl(url, function(error, meta, body) {
 			var jsonObj = JSON.parse(body.toString());
-			result[destination] = parseInt(jsonObj["routes"][0]["legs"][0]["steps"][0]["duration"]["value"]/60);
+			var steps = jsonObj["routes"][0]["legs"][0]["steps"];
+			var duration = 0;
+			for (i in steps) duration+= steps[i]["duration"]["value"];
+			result[destination] = parseInt(duration/60);
 			if (result["simei"] && result["tanah"] && result["simpang"]) res.send(result);
 		});
 	}

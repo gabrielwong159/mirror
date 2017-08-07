@@ -72,7 +72,7 @@ function loadBus(jsonString) {
 	`
 		<h2>Simei MRT</h2>
 		<p>
-			${parseTiming(est["simei"], j[5]["status"])}<br>
+			${parseTiming(est["simei"]+j[5]["next"], j[5]["status"])}<br>
 			Bus 5 ${getNext(5).includes("minute") ? "in " : ""}${getNext(5)}<br>
 			Alight in 4 stops
 		</p>
@@ -82,7 +82,7 @@ function loadBus(jsonString) {
 	`
 		<h2>Tanah Merah MRT</h2>
 		<p>
-			${parseTiming(est["tanah"], j[24]["status"])}<br>
+			${parseTiming(est["tanah"]+j[24]["next"], j[24]["status"])}<br>
 			Bus 24 ${getNext(24).includes("minute") ? "in " : ""}${getNext(24)}<br>
 			Alight in 4 stops
 		</p>
@@ -92,13 +92,14 @@ function loadBus(jsonString) {
 	`
 		<h2>Simpang Bedok</h2>
 		<p>
-			${parseTiming(est["simpang"], j[2]["status"])}<br>
+			${parseTiming(est["simpang"]+j[2]["next"], j[2]["status"])}<br>
 			Bus 2 ${getNext(2).includes("minute") ? "in " : ""}${getNext(2)}<br>
 			Alight in 6 stops
 		</p>
 	`
 	);
-	$("#bus").css("visibility", "visible");
+	$("#bus-loading").hide();
+	$("#bus").show();
 }
 
 function getMapsEstimate() {
@@ -111,6 +112,9 @@ function getMapsEstimate() {
 
 function setBusHTML() {
 	$display.innerHTML = `
+	<div id="bus-loading">
+		<img class="loading" src="/img/loading.gif">
+	</div>
 	<div id="bus">
 		<div id="bus-image">
 			<img src="/img/bus.png">
@@ -210,5 +214,5 @@ function setBusHTML() {
 		</div>
 	</div>
 	`;
-	$("#bus").css("visibility", "hidden");
+	$("#bus").hide();
 }

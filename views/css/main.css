@@ -130,7 +130,7 @@ body {
 }
 
 .sidebar {
-	width: 2.5vw;
+	width: 3vw;
 	height: 80vw;
 	float: left;
 
@@ -152,7 +152,7 @@ body {
 }
 
 #display {
-	width: 92.5vw;
+	width: 92vw;
 	height: auto;
 	float: left;
     display: block;
@@ -186,6 +186,11 @@ p.mapsheader {
 img.maps {
   width:85vw;
   margin-top: 5vw;
+}
+
+img.loading {
+  width: 70vw;
+  height: 70vw;
 }
 
 iframe.calendar {

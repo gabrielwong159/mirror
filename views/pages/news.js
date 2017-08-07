@@ -22,7 +22,7 @@ function newsStop() {
 }
 
 function newsPageLoading() {
-	$display.innerHTML = "<img src='/img/newsLoading.gif' width=800px height=800px>";
+	$display.innerHTML = "<img src='/img/loading.gif'>";
 }
 
 function generateNewsHTML(jsonObj, start, end) {
