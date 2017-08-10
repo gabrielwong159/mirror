@@ -22,11 +22,11 @@ function newsStop() {
 }
 
 function newsPageLoading() {
-	$display.innerHTML = "<img src='/img/loading.gif'>";
+	$display.innerHTML = "<img class='loading' src='/img/loading.gif'>";
 }
 
 function generateNewsHTML(jsonObj, start, end) {
-	var htmlString = "<div id='newsDisplay`>";
+	var htmlString = "<div id='news'>";
 
 	for (var i=start; i<end; i++) {
 		var obj = jsonObj[i];
