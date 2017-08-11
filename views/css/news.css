@@ -15,6 +15,11 @@ div#news div.newsItemContainer {
 	width: 80vw;
 }
 
+div#news div.imageContainer {
+	margin: 0;
+	width: 30vw;
+}
+
 div#news img.newsPic {
 	margin: 0;
 	width: 30vw;

@@ -6,22 +6,14 @@ css.innerHTML = `
 	src: url('/css/fonts/arcadeclassic.ttf');
 }
 
-html {
-	height: 100%;
-}
-
-body {
+div#game {
+	width: 100%;
 	height: 100%;
 
 	margin: 0;
 	padding: 0;
 
 	overflow: hidden;
-}
-
-div#game {
-	width: 100%;
-	height: 100%;
 }
 
 div#game-play-area {

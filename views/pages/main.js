@@ -16,7 +16,7 @@ function mainInit() {
 	mainPage.directory[KEY_4] = dirPage.init.bind(dirPage);
 	mainPage.directory[KEY_5] = calPage.init.bind(calPage);
 	mainPage.directory[KEY_6] = agendaPage.init.bind(agendaPage);
-	//mainPage.directory[KEY_7] = gamePage.init.bind(gamePage);
+	mainPage.directory[KEY_7] = gamePage.init.bind(gamePage);
 
 	loadMain();
 	loadSidebar("main");

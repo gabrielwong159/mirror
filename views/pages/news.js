@@ -33,7 +33,7 @@ function generateNewsHTML(jsonObj, start, end) {
 		var orientation = i%2 ? "left" : "right";
 
 		htmlString+= "<div class='newsItemContainer'>";
-		htmlString+= `<img class="newsPic ${orientation}" src="${obj.thumbnail}">`;
+		htmlString+= `<div class="imgContainer"><img class="newsPic ${orientation}" src="${obj.thumbnail}"></div>`;
 		htmlString+= `<div class="newsText"><a href="${obj.link}"><p id="newsTitle">${obj.title}</p></a><p id="newsDescription">${obj.description}</p><br></div>`;
 		htmlString+= "</div>";
 	}

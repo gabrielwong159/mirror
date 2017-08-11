@@ -6,13 +6,29 @@ const mainSidebar = {
 		1: '/img/icons/home.png',
 		2: '/img/icons/news.png',
 		3: '/img/icons/calendar.png',
-		4: '/img/icons/shutdown.png'
+		4: '/img/icons/game.png'
 	},
 
 	right: {
 		1: '/img/icons/bus.png',
 		2: '/img/icons/location.png',
 		3: '/img/icons/agenda.png',
+		4: ''
+	}
+};
+
+const busSidebar = {
+	left: {
+		1: '/img/icons/home.png',
+		2: '',
+		3: '',
+		4: ''
+	},
+
+	right: {
+		1: '',
+		2: '',
+		3: '',
 		4: ''
 	}
 };
@@ -65,6 +81,13 @@ const clearSidebar = {
 	}
 };
 
+const sidebars = {
+	"main": mainSidebar,
+	"bus": busSidebar,
+	"news": newsSidebar,
+	"directions": directionsSidebar
+};
+
 
 var $leftSidebar = document.getElementById("leftSidebar");
 var $rightSidebar = document.getElementById("rightSidebar");
@@ -74,9 +97,14 @@ function loadSidebar(pageType) {
 	var leftHtml = "";
 	var rightHtml = "";
 
+	/*
 	if (pageType == "main") sidebar = mainSidebar;
+	else if (pageType == "bus") sidebar = busSidebar;
 	else if (pageType == "news") sidebar = newsSidebar;
 	else if (pageType == "directions") sidebar = directionsSidebar;
+	else sidebar = clearSidebar;
+	*/
+	if (sidebars[pageType]) sidebar = sidebars[pageType];
 	else sidebar = clearSidebar;
 
 	for (var i=1; i<=4; i++) {

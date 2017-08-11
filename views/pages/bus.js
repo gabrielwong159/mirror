@@ -9,6 +9,7 @@ function busInit() {
 	setBusHTML();
 	retrieveData();
 	busInterval = setInterval(retrieveData, 60000);
+	loadSidebar("bus");
 }
 
 function busStop() {
