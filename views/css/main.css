@@ -125,10 +125,6 @@ body {
 	height: 100vw;
 }
 
-#motd {
-  margin-top:10vw;
-}
-
 .sidebar {
 	width: 3vw;
 	height: 80vw;
@@ -165,6 +161,7 @@ body {
     text-align: center;
     font-size: 3em;
     bottom: 0;
+    margin-top:10vw;
     width: 100%;
 }
 

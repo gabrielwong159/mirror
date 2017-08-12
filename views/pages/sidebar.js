@@ -97,13 +97,6 @@ function loadSidebar(pageType) {
 	var leftHtml = "";
 	var rightHtml = "";
 
-	/*
-	if (pageType == "main") sidebar = mainSidebar;
-	else if (pageType == "bus") sidebar = busSidebar;
-	else if (pageType == "news") sidebar = newsSidebar;
-	else if (pageType == "directions") sidebar = directionsSidebar;
-	else sidebar = clearSidebar;
-	*/
 	if (sidebars[pageType]) sidebar = sidebars[pageType];
 	else sidebar = clearSidebar;
 
