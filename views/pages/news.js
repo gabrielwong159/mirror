@@ -4,6 +4,8 @@ var newsPage = new Page("news", newsInit, newsStop);
 //const URL = 'http://www.channelnewsasia.com/rssfeeds/8395986';
 //const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
 const URL = "http://smart-mirror-news.azurewebsites.net/CNA";
+retrieveNews();
+newsPage.globals.reqInterval = setInterval(retrieveNews, 5 * 60 * 1000)
 
 newsPage.globals.json = null;
 newsPage.globals.page = 0;
@@ -20,8 +22,20 @@ function newsStop() {
 	document.removeEventListener("keydown", newsKeyEvent);
 }
 
-function newsPageLoading() {
-	$display.innerHTML = "<img class='loading' src='/img/loading.gif'>";
+function retrieveNews() {
+	fetch(URL)
+	.then(res => res.text())
+	.then(jsonString => JSON.parse(jsonString))
+	.then(function(jsonObj) {
+		newsPage.globals.json = jsonObj;
+	})
+	.catch(err => {
+		$display.innerHTML = `<div id='error'>${err}</div>`;
+	});
+}
+
+function loadNews() {
+	$display.innerHTML = generateNewsHTML(newsPage.globals.json, 0, 4);
 }
 
 function generateNewsHTML(jsonObj, start, end) {
@@ -44,25 +58,10 @@ function generateNewsHTML(jsonObj, start, end) {
 
 function newsKeyEvent(event) {
 	if (event.which == KEY_2 && currentPage == newsPage) {
-		newsPageLoading();
-		newsPage.globals.page = (newsPage.globals.page+1)%2;
+		newsPage.globals.page = 1 - newsPage.globals.page;
 
 		if (newsPage.globals.page == 0) $display.innerHTML = generateNewsHTML(newsPage.globals.json, 0, 4);
 		else $display.innerHTML = generateNewsHTML(newsPage.globals.json, 4, 8);
 	}
 }
 
-function loadNews() {
-	newsPageLoading();
-
-	fetch(URL)
-	.then(res => res.text())
-	.then(jsonString => JSON.parse(jsonString))
-	.then(function(jsonObj) {
-		newsPage.globals.json = jsonObj;
-		$display.innerHTML = generateNewsHTML(newsPage.globals.json, 0, 4);
-	})
-	.catch(err => {
-		$display.innerHTML = `<div id='error'>${err}</div>`;
-	});
-}

@@ -1,7 +1,7 @@
 // bus page - function 2
 var busPage = new Page("bus", busInit, busStop);
-retrieveData();
-busPage.globals.reqInterval = setInterval(retrieveData, 30000);
+retrieveBus();
+busPage.globals.reqInterval = setInterval(retrieveBus, 30 * 1000);
 
 function busInit() {
 	busPage.directory[KEY_1] = mainPage.init.bind(mainPage);
@@ -16,7 +16,7 @@ function busStop() {
 	clearInterval(busPage.globals.loadInterval);
 }
 
-function retrieveData() {
+function retrieveBus() {
 	var arrRequest = new XMLHttpRequest();
 	var arrPath = "https://smart-mirror-news.azurewebsites.net/bus";
 	arrRequest.onreadystatechange = function() {
@@ -39,7 +39,7 @@ function refreshPage() {
 
 	clearInterval(busPage.globals.refreshInterval);
 	loadBus();
-	busPage.globals.loadInterval = setInterval(loadBus, 60000);
+	busPage.globals.loadInterval = setInterval(loadBus, 60 * 1000);
 	$("#bus-loading").hide();
 	$("#bus").show();
 }
