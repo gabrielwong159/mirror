@@ -5,9 +5,8 @@ var newsPage = new Page("news", newsInit, newsStop);
 //const URL = 'http://www.sutd.edu.sg/About-Us/News-and-Events/News?rss=newsFeed';
 const URL = "http://smart-mirror-news.azurewebsites.net/CNA";
 
-var newsJson = null;
-
-var newsItemPage = 0;
+newsPage.globals.json = null;
+newsPage.globals.page = 0;
 
 function newsInit() {
 	newsPage.directory[KEY_1] = mainPage.init.bind(mainPage);
@@ -46,10 +45,10 @@ function generateNewsHTML(jsonObj, start, end) {
 function newsKeyEvent(event) {
 	if (event.which == KEY_2 && currentPage == newsPage) {
 		newsPageLoading();
-		newsItemPage = (newsItemPage+1)%2;
+		newsPage.globals.page = (newsPage.globals.page+1)%2;
 
-		if (newsItemPage == 0) $display.innerHTML = generateNewsHTML(newsJson, 0, 4);
-		else $display.innerHTML = generateNewsHTML(newsJson, 4, 8);
+		if (newsPage.globals.page == 0) $display.innerHTML = generateNewsHTML(newsPage.globals.json, 0, 4);
+		else $display.innerHTML = generateNewsHTML(newsPage.globals.json, 4, 8);
 	}
 }
 
@@ -60,8 +59,8 @@ function loadNews() {
 	.then(res => res.text())
 	.then(jsonString => JSON.parse(jsonString))
 	.then(function(jsonObj) {
-		newsJson = jsonObj;
-		$display.innerHTML = generateNewsHTML(newsJson, 0, 4);
+		newsPage.globals.json = jsonObj;
+		$display.innerHTML = generateNewsHTML(newsPage.globals.json, 0, 4);
 	})
 	.catch(err => {
 		$display.innerHTML = `<div id='error'>${err}</div>`;

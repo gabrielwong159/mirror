@@ -10,6 +10,7 @@ function Page(name, init, stop) {
 	this.name = name;
 	this.stop = stop;
 	this.directory = {};
+	this.globals = {};
 
 	this.init = function() {
 		currentPage = this;

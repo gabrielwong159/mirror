@@ -1,29 +1,47 @@
 // bus page - function 2
 var busPage = new Page("bus", busInit, busStop);
-
-var busInterval;
+retrieveData();
+busPage.globals.reqInterval = setInterval(retrieveData, 30000);
 
 function busInit() {
 	busPage.directory[KEY_1] = mainPage.init.bind(mainPage);
 
 	setBusHTML();
-	retrieveData();
-	busInterval = setInterval(retrieveData, 60000);
+	refreshPage();
+	busPage.globals.refreshInterval = setInterval(refreshPage, 1000);
 	loadSidebar("bus");
 }
 
 function busStop() {
-	clearInterval(busInterval);
+	clearInterval(busPage.globals.loadInterval);
 }
 
 function retrieveData() {
-	var request = new XMLHttpRequest();
-	var path = "https://smart-mirror-news.azurewebsites.net/bus";
-	request.onreadystatechange = function() {
-		if (request.readyState==4 && request.status==200) loadBus(request.responseText);
+	var arrRequest = new XMLHttpRequest();
+	var arrPath = "https://smart-mirror-news.azurewebsites.net/bus";
+	arrRequest.onreadystatechange = function() {
+		if (arrRequest.readyState==4 && arrRequest.status==200) busPage.globals.arr = arrRequest.responseText;
 	}
-	request.open("GET", path, true);
-	request.send(null);
+	arrRequest.open("GET", arrPath, true);
+	arrRequest.send(null);
+
+	var mapsRequest = new XMLHttpRequest();	
+	var mapsPath = "https://smart-mirror-news.azurewebsites.net/maps";
+	mapsRequest.onreadystatechange = function() {
+		if (mapsRequest.readyState==4 && mapsRequest.status==200) busPage.globals.maps = mapsRequest.responseText;
+	}
+	mapsRequest.open("GET", mapsPath, true);
+	mapsRequest.send(null);
+}
+
+function refreshPage() {
+	if (!(busPage.globals.arr && busPage.globals.maps)) return;
+
+	clearInterval(busPage.globals.refreshInterval);
+	loadBus();
+	busPage.globals.loadInterval = setInterval(loadBus, 60000);
+	$("#bus-loading").hide();
+	$("#bus").show();
 }
 
 function loadBus(jsonString) {
@@ -40,8 +58,9 @@ function loadBus(jsonString) {
 	function getNext(bus) { return parseTiming(j[bus]["next"], j[bus]["status"]); }
 	function getSubsequent(bus) { return parseTiming(j[bus]["subsequent"], j[bus]["status"]); }
 
-	var j = JSON.parse(jsonString);
-	var est = getMapsEstimate();
+	var j = busPage.globals.arr;
+	var est = busPage.globals.maps;
+
 	$("#bus-timings-2").html(
 	`
 		<h2>Bus 2</h2>
@@ -99,20 +118,11 @@ function loadBus(jsonString) {
 		</p>
 	`
 	);
-	$("#bus-loading").hide();
-	$("#bus").show();
-}
-
-function getMapsEstimate() {
-	var request = new XMLHttpRequest();	
-	var path = "https://smart-mirror-news.azurewebsites.net/maps";
-	request.open("GET", path, false);
-	request.send(null);
-	return JSON.parse(request.responseText)
 }
 
 function setBusHTML() {
-	$display.innerHTML = `
+	$display.innerHTML =
+	`
 	<div id="bus-loading">
 		<img class="loading" src="/img/loading.gif">
 	</div>
