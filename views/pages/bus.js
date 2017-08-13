@@ -20,7 +20,7 @@ function retrieveBus() {
 	var arrRequest = new XMLHttpRequest();
 	var arrPath = "https://smart-mirror-news.azurewebsites.net/bus";
 	arrRequest.onreadystatechange = function() {
-		if (arrRequest.readyState==4 && arrRequest.status==200) busPage.globals.arr = arrRequest.responseText;
+		if (arrRequest.readyState==4 && arrRequest.status==200) busPage.globals.arr = JSON.parse(arrRequest.responseText);
 	}
 	arrRequest.open("GET", arrPath, true);
 	arrRequest.send(null);
@@ -28,7 +28,7 @@ function retrieveBus() {
 	var mapsRequest = new XMLHttpRequest();	
 	var mapsPath = "https://smart-mirror-news.azurewebsites.net/maps";
 	mapsRequest.onreadystatechange = function() {
-		if (mapsRequest.readyState==4 && mapsRequest.status==200) busPage.globals.maps = mapsRequest.responseText;
+		if (mapsRequest.readyState==4 && mapsRequest.status==200) busPage.globals.maps = JSON.parse(mapsRequest.responseText);
 	}
 	mapsRequest.open("GET", mapsPath, true);
 	mapsRequest.send(null);
