@@ -28,7 +28,8 @@ def buttonPressed():
                 if prev[i] == False:
                     device.emit_click(KEYS[i])
                     if BUTTONS[i] == 13:
-                        os.system('reboot')
+                        pass
+			#os.system('reboot')
             else:
                 curr[i] = False
 
