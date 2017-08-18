@@ -7,7 +7,9 @@ $(document).ready(function() {
     	'"Hell is other people."',
     	'"What does fashion lack? Microcontrollers."',
     	'"Peanut butter is the glue that holds my body together."',
-        '"It\'s over Anakin, I have the high ground."'
+        '"It\'s over Anakin, I have the high ground."',
+        '"Yes."',
+        '"They will be met with fire and fury like the world has never seen."'
     ];
     
     var htmlString = "";

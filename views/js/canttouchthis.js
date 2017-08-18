@@ -51,7 +51,7 @@ div.blinky {
 }
 
 p.game {
-	color: white;
+	color: black;
 	font-family: arcade;
 
 	margin: 0;

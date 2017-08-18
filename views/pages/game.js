@@ -5,4 +5,5 @@ function gameInit() {
 
 	$display.innerHTML = "<div id='game' />";
 	$.getScript("/js/canttouchthis.js");
+	loadSidebar("game");
 }
