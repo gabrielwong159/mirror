@@ -30,7 +30,7 @@ function retrieveNews() {
 		newsPage.globals.json = jsonObj;
 	})
 	.catch(err => {
-		$display.innerHTML = `<div id='error'>${err}</div>`;
+		console.log(err);
 	});
 }
 

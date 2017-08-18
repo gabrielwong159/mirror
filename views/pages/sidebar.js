@@ -65,6 +65,22 @@ const directionsSidebar = {
 	}
 };
 
+const gameSidebar = {
+	left: {
+		1: '/img/icons/home.png',
+		2: '',
+		3: '/img/icons/game_left.png',
+		4: ''
+	},
+
+	right: {
+		1: '',
+		2: '',
+		3: '/img/icons/game_right.png',
+		4: ''
+	}
+}
+
 const clearSidebar = {
 	left: {
 		1: '',
@@ -85,7 +101,8 @@ const sidebars = {
 	"main": mainSidebar,
 	"bus": busSidebar,
 	"news": newsSidebar,
-	"directions": directionsSidebar
+	"directions": directionsSidebar,
+	"game": gameSidebar
 };
 
 
