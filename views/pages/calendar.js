@@ -50,14 +50,15 @@ function select() {
 //end of page-specific functions
 
 function calInit() {
+	calPage.directory[KEY_1] = mainPage.init.bind(mainPage);
+	calPage.directory[KEY_2] = leftMonth(null,dd,mm,yyyy);
+	calPage.directory[KEY_3] = rightMonth(null,dd,mm,yyyy);
 	var today = new Date();
 	var dd = today.getDate();
 	var mm = today.getMonth()+1; //January is 0!
 	var yyyy = today.getFullYear();
 	loadCalendar(dd, mm, yyyy);
-	calPage.directory[KEY_1] = mainPage.init.bind(mainPage);
-	calPage.directory[KEY_2] = leftMonth(null,dd,mm,yyyy);
-	calPage.directory[KEY_3] = rightMonth(null,dd,mm,yyyy);
+
 	//calPage.directory[KEY_4] = leftDay;
 	//calPage.directory[KEY_5] = rightDay;
 	//calPage.directory[KEY_6] = upDay;
@@ -164,6 +165,7 @@ function loadCalendar(dd, mm, yyyy) {
 }
 
 	function leftMonth(day,month,year) {
+		console.log("HELLO CAN I HAVE YOUR ATTENTION2");
 		//goes to the previous month, eg. Feb -> Jan
 		if (month == 1){
 			loadCalendar(day,12,year-1);
@@ -174,6 +176,7 @@ function loadCalendar(dd, mm, yyyy) {
 	}
 
 	function rightMonth(dd,mm,yyyy) {
+		console.log("HELLO CAN I HAVE YOUR ATTENTION3");
 		if (mm == 12){
 			loadCalendar(dd,1,yyyy+1);
 		}
