@@ -51,8 +51,8 @@ function select() {
 
 function calInit() {
 	calPage.directory[KEY_1] = mainPage.init.bind(mainPage);
-	calPage.directory[KEY_2] =  calPage.init.bind(leftMonth(null,dd,mm,yyyy));
-	calPage.directory[KEY_3] = bind(rightMonth(null,dd,mm,yyyy);
+	calPage.directory[KEY_2] = leftMonth;
+	calPage.directory[KEY_3] = rightMonth;
 	var today = new Date();
 	var dd = today.getDate();
 	var mm = today.getMonth()+1; //January is 0!
@@ -164,9 +164,11 @@ function loadCalendar(dd, mm, yyyy) {
 	updateCalendar(calendarURL, mm, yyyy);
 }
 
-	function leftMonth(day,month,year) {
+	function leftMonth() {
 		console.log("HELLO CAN I HAVE YOUR ATTENTION2");
 		//goes to the previous month, eg. Feb -> Jan
+		month = document.getElementById('calendar1').contentWindow.document.getElementById(monthAndYear).innerHTML;
+		console.log(month);
 		if (month == 1){
 			loadCalendar(day,12,year-1);
 		}
