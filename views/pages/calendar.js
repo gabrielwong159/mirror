@@ -109,7 +109,6 @@ function loadCalendar(dd, mm, yyyy) {
 	hideBox("motd");
 	showBox("caldiv");
 
-	var todaysDateString = mm+"."+dd+"."+yyyy;
 	var monthsFirstDay = mm+"."+1+"."+yyyy;
 	// console.log(monthsFirstDay);
 	// console.log("This month's first day lands on a " + Date.parse(monthsFirstDay).toString("dddd"));
@@ -167,8 +166,12 @@ function loadCalendar(dd, mm, yyyy) {
 	function leftMonth() {
 		console.log("HELLO CAN I HAVE YOUR ATTENTION2");
 		//goes to the previous month, eg. Feb -> Jan
-		month = document.getElementById('calendar1').contentWindow.document.getElementById('monthAndYear').innerHTML;
-		console.log(month);
+		mmyyyy = document.getElementById('calendar1').contentWindow.document.getElementById('monthAndYear').innerHTML;
+		console.log(mmyyyy);
+		var leftDay = new Date();
+		var day = leftDay.getDate();
+		var month = Date.parse(mmyyyy).getMonth()+1;
+		var year = Date.parse(mmyyyy).getFullYear();
 		if (month == 1){
 			loadCalendar(day,12,year-1);
 		}
