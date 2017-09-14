@@ -1,4 +1,5 @@
 var calPage = new Page("calendar", calInit, null);
+var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
 
 function localeTimeStringConverter(string) {
 	var returnvar = Date.parse(string).toString('h')+':'+ Date.parse(string).toString('mm') + ' ' + string[string.length-2] + string[string.length-1]
@@ -157,7 +158,6 @@ function loadCalendar(dd, mm, yyyy) {
 	}
 	//REMEMBER THE FORMAT IS MM/DD/YYYY. DARN AMERICANS.
 	//1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
-	var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
 	}
 
 	function leftMonth(day,month,year) {
