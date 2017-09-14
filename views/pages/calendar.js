@@ -49,6 +49,11 @@ function select() {
 //end of page-specific functions
 
 function calInit() {
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	loadCalendar(dd, mm, yyyy);
 	calPage.directory[KEY_1] = mainPage.init.bind(mainPage);
 	calPage.directory[KEY_2] = leftMonth.bind(null,dd,mm,yyyy);
 	calPage.directory[KEY_3] = rightMonth.bind(null,dd,mm,yyyy);
@@ -58,11 +63,6 @@ function calInit() {
 	//calPage.directory[KEY_7] = downDay;
 	//calPage.directory[KEY_8] = select;
 
-	var today = new Date();
-	var dd = today.getDate();
-	var mm = today.getMonth()+1; //January is 0!
-	var yyyy = today.getFullYear();
-	loadCalendar(dd, mm, yyyy);
 }
 
 var months = {
@@ -178,7 +178,7 @@ function loadCalendar(dd, mm, yyyy) {
 			loadCalendar(dd,mm+1,yyyy);
 		}
 	}
-	
+
 	updateCalendar(calendarURL, mm, yyyy);
 	console.log(mm);
 }
