@@ -180,13 +180,19 @@ function loadCalendar(dd, mm, yyyy) {
 		}
 	}
 
-	function rightMonth(dd,mm,yyyy) {
+	function rightMonth() {
 		console.log("HELLO CAN I HAVE YOUR ATTENTION3");
-		if (mm == 12){
-			loadCalendar(dd,1,yyyy+1);
+		mmyyyy = document.getElementById('calendar1').contentWindow.document.getElementById('monthAndYear').innerHTML;
+		console.log(mmyyyy);
+		var leftDay = new Date();
+		var day = leftDay.getDate();
+		var month = Date.parse(mmyyyy).getMonth()+1;
+		var year = Date.parse(mmyyyy).getFullYear();
+		if (month == 12){
+			loadCalendar(day,1,year+1);
 		}
 		else {
-			loadCalendar(dd,mm+1,yyyy);
+			loadCalendar(day,month+1,year);
 		}
 }
 
