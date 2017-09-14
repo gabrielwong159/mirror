@@ -167,7 +167,7 @@ function loadCalendar(dd, mm, yyyy) {
 	function leftMonth() {
 		console.log("HELLO CAN I HAVE YOUR ATTENTION2");
 		//goes to the previous month, eg. Feb -> Jan
-		month = document.getElementById('calendar1').contentWindow.document.getElementById(monthAndYear).innerHTML;
+		month = document.getElementById('calendar1').contentWindow.document.getElementById('monthAndYear').innerHTML;
 		console.log(month);
 		if (month == 1){
 			loadCalendar(day,12,year-1);
