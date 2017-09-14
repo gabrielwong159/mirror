@@ -55,8 +55,8 @@ function calInit() {
 	var yyyy = today.getFullYear();
 	loadCalendar(dd, mm, yyyy);
 	calPage.directory[KEY_1] = mainPage.init.bind(mainPage);
-	calPage.directory[KEY_2] = leftMonth.bind(null,dd,mm,yyyy);
-	calPage.directory[KEY_3] = rightMonth.bind(null,dd,mm,yyyy);
+	calPage.directory[KEY_2] = leftMonth(null,dd,mm,yyyy);
+	calPage.directory[KEY_3] = rightMonth(null,dd,mm,yyyy);
 	//calPage.directory[KEY_4] = leftDay;
 	//calPage.directory[KEY_5] = rightDay;
 	//calPage.directory[KEY_6] = upDay;
@@ -157,6 +157,7 @@ function loadCalendar(dd, mm, yyyy) {
 	//REMEMBER THE FORMAT IS MM/DD/YYYY. DARN AMERICANS.
 	//1 to 31/30/28 date system finally SET UP! Edit id=day(DAYNUMBER>to edit individual cells' contents for your month.
 	var calendarURL = 'https://www.googleapis.com/calendar/v3/calendars/sutd.app@gmail.com/events?key=AIzaSyBxIYzfHxIhawdppf8YeL_7PgIdY1g0evI';
+
 	function leftMonth(day,month,year) {
 	  //goes to the previous month, eg. Feb -> Jan
 		console.log(day);
