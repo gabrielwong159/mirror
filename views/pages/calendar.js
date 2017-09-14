@@ -101,6 +101,8 @@ var dayW = {
 }
 
 function loadCalendar(dd, mm, yyyy) {
+	console.log("HELLO CAN I HAVE YOUR ATTENTION");
+	console.log(dd);
 	//hideBox("info");
 	hideBox("main");
 	hideBox("motd");
@@ -108,8 +110,8 @@ function loadCalendar(dd, mm, yyyy) {
 
 	var todaysDateString = mm+"."+dd+"."+yyyy;
 	var monthsFirstDay = mm+"."+1+"."+yyyy;
-	console.log(monthsFirstDay);
-	console.log("This month's first day lands on a " + Date.parse(monthsFirstDay).toString("dddd"));
+	// console.log(monthsFirstDay);
+	// console.log("This month's first day lands on a " + Date.parse(monthsFirstDay).toString("dddd"));
 	var monthsFirstDate = Date.parse(monthsFirstDay).toString("dddd");
 	document.getElementById('calendar1').contentWindow.document.getElementById("monthAndYear").innerHTML = months[mm] + " " + yyyy;
 
