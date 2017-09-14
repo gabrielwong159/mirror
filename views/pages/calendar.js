@@ -51,8 +51,8 @@ function select() {
 
 function calInit() {
 	calPage.directory[KEY_1] = mainPage.init.bind(mainPage);
-	calPage.directory[KEY_2] = leftMonth(null,dd,mm,yyyy);
-	calPage.directory[KEY_3] = rightMonth(null,dd,mm,yyyy);
+	calPage.directory[KEY_2] = bind(leftMonth(null,dd,mm,yyyy));
+	calPage.directory[KEY_3] = bind(rightMonth(null,dd,mm,yyyy));
 	var today = new Date();
 	var dd = today.getDate();
 	var mm = today.getMonth()+1; //January is 0!
