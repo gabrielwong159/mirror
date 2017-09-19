@@ -106,10 +106,10 @@ const sidebars = {
 };
 
 
-var $leftSidebar = document.getElementById("leftSidebar");
-var $rightSidebar = document.getElementById("rightSidebar");
-
 function loadSidebar(pageType) {
+	var $leftSidebar = document.getElementById("leftSidebar");
+	var $rightSidebar = document.getElementById("rightSidebar");
+
 	var sidebar = null;
 	var leftHtml = "";
 	var rightHtml = "";

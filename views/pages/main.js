@@ -24,7 +24,6 @@ function mainInit() {
 
 function loadMain() {
 	$display.innerHTML = "<img src='/img/idcwelcome.png' id='idcwelcome'>";
-	hideBox("busdiv");
 	hideBox("caldiv");
 	hideBox("agddiv");
 	showBox("info");

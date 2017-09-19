@@ -15,6 +15,10 @@ app.get('/hide-motd', (req, res) => {
 	res.render('hide_motd');
 });
 
+app.get('/mini', (req, res) => {
+	res.render('mini');
+})
+
 app.listen(port, err => {
 	if (err) throw err;
 	console.log('Smart Mirror server running on port', port);

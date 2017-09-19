@@ -118,11 +118,13 @@ textarea {
 body {
     background-color: #000000;
     color: #F8F8FF;
-}
+    width: 98vw;
+    height: 100vw;
+} 
 
 #main {
-	width: 98vw;
-	height: 100vw;
+  width: 100%;
+  height: 100%;
 }
 
 .sidebar {
@@ -132,28 +134,42 @@ body {
 
   font-size: 50px;
 }
+
 #rightsidebar {
   margin-right:0;
 }
 #leftsidebar {
   margin-left:0;
 }
-#idcwelcome {
-  width:60vw;
-}
-.sidebarIcon {
+
+.sidebar img {
   width: 3vw;
   height: 3vw;
   margin-top: 15vw;
+}
+
+.sidebar#mini-sidebar {
+  width: 100%;
+  height: 3vw;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar#mini-sidebar img {
+  margin: 0 3 0 3;
 }
 
 #display {
 	width: 92vw;
 	height: auto;
 	float: left;
-    display: block;
-    align-items: center;
-    vertical-align: middle;
+  display: block;
+  align-items: center;
+  vertical-align: middle;
+}
+
+#idcwelcome {
+  width:60vw;
 }
 
 #motd {
