@@ -9,8 +9,6 @@ $(document).ready(function() {
     	'"Peanut butter is the glue that holds my body together."',
         '"It\'s over Anakin, I have the high ground."',
         '"Yes."',
-        '"Pay attention, Gabriel."',
-        '"No matter how stupid you feel, at least you\'re not as stupid as your sister thinks you are."',
         '"They will be met with fire and fury like the world has never seen."'
     ];
     
