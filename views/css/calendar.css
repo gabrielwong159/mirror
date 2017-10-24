@@ -30,15 +30,15 @@ header {
 }
 
 #monthAndYear {
-  background: #263248;
+  background: #696969;
   margin:0;
   height:8vw;
   font-size: 6vw;
   font-family: inherit;
-  padding-bottom:1%;
+  padding-top:1.1vw;
 }
 #calendar-wrap {
-  border: 1px solid #263248;
+  border: 1px solid #000000;
 }
 #calendar li {
     display: block;
@@ -58,8 +58,8 @@ header {
 #calendar ul.weekdays li {
     text-align: center;
     height:5vw;
-    padding-top:0.5vw;
-    background:#7e8aa2;
+    padding-top:0.8vw;
+    background:#00000;
     color: #fff;
     font-size: 3vw;
 }
@@ -80,22 +80,24 @@ header {
     width: 100%;
     height: 100%;
     float: right;
-    border: 1px solid #263248;
+    border: 1px solid #000000;
 }
 
 #calendar .dateNumber {
   font-size:2vw;
   height:3vw;
-  background:#263248;
+  background:#696969;
   vertical-align: middle;
   text-align: center;
+  border: 5px solid #000000;
+
 }
 #calendar .dateWord {
   margin-left:8px;
   margin-right:8px;
   text-align: center;
   height:100%;
-  padding-top:.2vw;
+  padding-top:.4vw;
   vertical-align:middle;
 }
 span
