@@ -1,5 +1,5 @@
 #agdHeader {
-  font-size: 80;
+  font-size: 3vw;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   margin-bottom:100px;
@@ -7,7 +7,7 @@
 
 th.time {
   width:30%;
-  font-size:60;
+  font-size:2vw;
   text-align: left;
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
@@ -18,7 +18,7 @@ table {
 }
 div.times {
   width:100%;
-  font-size:60;
+  font-size:2vw;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
@@ -26,28 +26,28 @@ div.times {
 
 th.event {
   width: 50%;
-  font-size: 60;
+  font-size: 2vw;
   text-align: right;
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
 }
 
 th.events {
-  width: 70%;
-  font-size: 60;
+  width: 60%;
+  font-size: 2vw;
   text-align: left;
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
-  padding-left:100px;
+  padding-left:10vw;
 }
 
 th.locations {
-  width: 30%;
-  font-size: 60;
+  width: 40%;
+  font-size: 2vw;
   text-align: right;
   font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
-  padding-right:100px;
+  padding-right:20vw;
 }
 
 #agTable {
